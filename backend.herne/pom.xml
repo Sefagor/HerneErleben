@@ -12,7 +12,7 @@
 	<artifactId>backend.herne</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>backend.herne</name>
-	<description>Daten von der Stadt Herne</description>
+	<description>App Backend Herne</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -32,7 +32,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
