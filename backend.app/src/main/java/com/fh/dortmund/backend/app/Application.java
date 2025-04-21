@@ -1,13 +1,13 @@
-package com.fh.dortmund.SWT2_KID_APP;
+package com.fh.dortmund.backend.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Swt2KidAppApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Swt2KidAppApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }

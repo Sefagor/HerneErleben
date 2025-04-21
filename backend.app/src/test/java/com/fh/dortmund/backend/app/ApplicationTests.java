@@ -1,10 +1,10 @@
-package com.fh.dortmund.SWT2_KID_APP;
+package com.fh.dortmund.backend.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Swt2KidAppApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {
