@@ -11,7 +11,7 @@
 	<groupId>com.fh.dortmund</groupId>
 	<artifactId>backend.app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>backend.app</name>
+	<name>backend_app</name>
 	<description>App Backend</description>
 	<url/>
 	<licenses>
