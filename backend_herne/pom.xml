@@ -11,7 +11,7 @@
 	<groupId>com.fh.dortmund</groupId>
 	<artifactId>backend.herne</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>backend.herne</name>
+	<name>backend_herne</name>
 	<description>App Backend Herne</description>
 	<url/>
 	<licenses>
