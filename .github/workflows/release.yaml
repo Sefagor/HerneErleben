@@ -40,11 +40,11 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v6
-        if: ${{ matrix.project != '' }}
-        with:
-          context: ${{ matrix.project }}
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/${{ github.repository }}/${{ matrix.project }}:${{ github.sha }}
-          labels: ${{ steps.metadata.outputs.labels }}
+   #   - name: Build and push Docker image
+    #    uses: docker/build-push-action@v6
+     #   if: ${{ matrix.project != '' }}
+      #  with:
+       #   context: ${{ matrix.project }}
+        #  push: ${{ github.event_name != 'pull_request' }}
+         #tags: ghcr.io/${{ github.repository }}/${{ matrix.project }}:${{ github.sha }}
+          #labels: ${{ steps.metadata.outputs.labels }}
