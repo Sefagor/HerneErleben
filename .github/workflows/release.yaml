@@ -17,9 +17,6 @@ jobs:
       packages: write
     strategy:
       fail-fast: false
-      matrix:
-        project:
-          - frontend_app     # ← Yeni eklenen proje
     steps:
       - name: Checkout
         uses: actions/checkout@v4
