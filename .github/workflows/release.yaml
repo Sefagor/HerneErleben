@@ -19,8 +19,6 @@ jobs:
       fail-fast: false
       matrix:
         project:
-          - backend
-          - backend_herne
           - frontend_app     # ← Yeni eklenen proje
 
     steps:
