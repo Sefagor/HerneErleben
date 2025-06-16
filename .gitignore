@@ -117,3 +117,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 /.idea/
+node_modules/
+/frontend/node_modules
