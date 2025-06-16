@@ -33,3 +33,12 @@ jobs:
         if: ${{ matrix.project != '' }}
         working-directory: ${{ matrix.project }}
         run: mvn --batch-mode --update-snapshots verify
+
+      - name: Install Frontend Dependencies
+        working-directory: frontend_app
+        run: npm ci
+
+      - name: Build Frontend
+        working-directory: frontend_app
+        run: npm run build
+
