@@ -1,0 +1,28 @@
+services:
+  backend-herne:
+    build: ./backend_herne
+    ports:
+      - "8091:8081"
+
+  backend:
+    build: ./backend
+    ports:
+      - "8090:8080"
+    depends_on:
+      - database
+
+  database:
+    image: postgres:latest
+    restart: always
+    volumes:
+      - test:/usr
+    environment:
+      POSTGRES_DB: eventsManagement
+      POSTGRES_USER: admin_user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5433:5432"
+
+volumes:
+  smtp4dev-data:
+  test:
