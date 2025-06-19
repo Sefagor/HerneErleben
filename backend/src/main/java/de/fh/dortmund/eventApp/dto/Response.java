@@ -20,7 +20,6 @@ public class Response {
     private String bookingConfirmationCode;
 
     private UserDTO user;
-
     private EventDTO event;
     private BookingDTO booking;
     private List<UserDTO> userList;

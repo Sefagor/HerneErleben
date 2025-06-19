@@ -3,6 +3,7 @@ package de.fh.dortmund.eventApp.controller;
 
 import de.fh.dortmund.eventApp.dto.Response;
 import de.fh.dortmund.eventApp.service.BookingService;
+import de.fh.dortmund.eventApp.service.facade.BookingEmailFacade;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
 public class BookingController {
 
     private final BookingService bookingService;
+    private final BookingEmailFacade bookingEmailFacade;
 
-    public BookingController(BookingService bookingService) {
+    public BookingController(BookingService bookingService, BookingEmailFacade bookingEmailFacade) {
         this.bookingService = bookingService;
+        this.bookingEmailFacade = bookingEmailFacade;
     }
 
     @PostMapping("/book-event/{eventID}/{userId}")
@@ -25,7 +28,7 @@ public class BookingController {
                                                  @PathVariable Long userId) {
 
 
-        Response response = bookingService.bookAnEvent(userId, eventID);
+        Response response = bookingEmailFacade.makeBooking(userId, eventID);
         return ResponseEntity.status(response.getStatusCode()).body(response);
 
     }
@@ -46,7 +49,7 @@ public class BookingController {
     @DeleteMapping("/cancel/{bookingId}")
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public ResponseEntity<Response> cancelBooking(@PathVariable Long bookingId) {
-        Response response = bookingService.cancelBooking(bookingId);
+        Response response = bookingEmailFacade.cancelBooking(bookingId);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
