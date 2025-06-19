@@ -15,6 +15,6 @@ public class UserDTO {
     private String name;
     private String phoneNumber;
     private String role;
-    //private List<BookingDTO> bookings = new ArrayList<>();
+    private List<BookingDTO> bookings = new ArrayList<>();
 
 }
