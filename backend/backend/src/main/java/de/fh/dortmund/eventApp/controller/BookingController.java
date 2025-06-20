@@ -6,6 +6,7 @@ import de.fh.dortmund.eventApp.service.BookingService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import de.fh.dortmund.eventApp.service.facade.BookingEmailFacade;
 
 
 @RestController
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
 public class BookingController {
 
     private final BookingService bookingService;
+    private final BookingEmailFacade bookingEmailFacade;
 
-    public BookingController(BookingService bookingService) {
+    public BookingController(BookingService bookingService, BookingEmailFacade bookingEmailFacade) {
         this.bookingService = bookingService;
+        this.bookingEmailFacade = bookingEmailFacade;
     }
 
     @PostMapping("/book-event/{eventID}/{userId}")
