@@ -98,27 +98,27 @@ export default class ApiService {
         );
         return response.data;
     }
-static async addEvent(formData) {
- console.log('👉 Sending FormData to /events/add:');
-    for (let pair of formData.entries()) {
-        console.log(`${pair[0]}: ${pair[1]}`);
-    }
-
-    const response = await axios.post(
-        `${this.BASE_URL}/events/add`,
-       /* `${this.HERNE_URL}/send`,*/
-        formData,
-        {
-            headers: {
-                ...this.getHeader(),
-                "Content-Type": "multipart/form-data",
-            },
+    static async addEvent(formData) {
+        console.log('👉 Sending FormData to /events/add:');
+        for (let pair of formData.entries()) {
+            console.log(`${pair[0]}: ${pair[1]}`);
         }
-    );
+
+        const response = await axios.post(
+            `${this.BASE_URL}/events/add`,
+            /* `${this.HERNE_URL}/send`,*/
+            formData,
+            {
+                headers: {
+                    ...this.getHeader(),
+                    "Content-Type": "multipart/form-data",
+                },
+            }
+        );
 
         console.log('✅ Response:', response.data);
-    return response.data;
-}
+        return response.data;
+    }
 
 
     static async getRoomTypes() {
@@ -196,39 +196,39 @@ static async addEvent(formData) {
         );
         return response.data;
     }
-static async sendEmailToAll(emailContent) {
-    const response = await axios.post(
-        `${this.BASE_URL}/events/notify`,
-        emailContent,
-        { headers: this.getHeader() }
-    );
-    return response.data;
-}
-
-
-/*
-    static async updateRoom(roomId, formData) {
-        const response = await axios.put(
-            `${this.BASE_URL}/rooms/update/${roomId}`,
-            formData,
-            {
-                headers: {
-                    ...this.getHeader(),
-                    "Content-Type": "multipart/form-data",
-                },
-            }
+    static async sendEmailToAll(emailContent) {
+        const response = await axios.post(
+            `${this.BASE_URL}/events/notify`,
+            emailContent,
+            { headers: this.getHeader() }
         );
         return response.data;
     }
 
-    static async deleteRoom(roomId) {
-        const response = await axios.delete(
-            `${this.BASE_URL}/rooms/delete/${roomId}`,
-            {headers: this.getHeader()}
-        );
-        return response.data;
-    }
-*/
+
+    /*
+        static async updateRoom(roomId, formData) {
+            const response = await axios.put(
+                `${this.BASE_URL}/rooms/update/${roomId}`,
+                formData,
+                {
+                    headers: {
+                        ...this.getHeader(),
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            return response.data;
+        }
+
+        static async deleteRoom(roomId) {
+            const response = await axios.delete(
+                `${this.BASE_URL}/rooms/delete/${roomId}`,
+                {headers: this.getHeader()}
+            );
+            return response.data;
+        }
+    */
     /** BOOKINGS */
     static async bookRoom(roomId, userId, booking) {
         const response = await axios.post(
