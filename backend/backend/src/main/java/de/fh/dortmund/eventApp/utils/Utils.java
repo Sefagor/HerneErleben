@@ -35,7 +35,22 @@ public class Utils {
         return userDTO;
     }
 
+    public static EventDTO mapEventEntityToEventDTO(Event event) {
+        EventDTO eventDTO = new EventDTO();
 
+        eventDTO.setId(event.getId());
+        eventDTO.setEventDate(event.getEventDate());
+        eventDTO.setStatus(event.getStatus());
+        eventDTO.setEventPhoto(event.getEventPhoto());
+        eventDTO.setEventDescription(event.getEventDescription());
+        eventDTO.setMaxParticipant(event.getMaxParticipant());
+        eventDTO.setEventName(event.getEventName());
+        eventDTO.setEventLocation(mapLocationEntityToLocationDTO(event.getEventLocation()));
+        eventDTO.setStartTime(event.getStartTime());
+        eventDTO.setEndTime(event.getEndTime());
+        eventDTO.setCategories(event.getCategory().stream().map(Utils::mapCategoryToCategoryDTO).toList());
+        return eventDTO;
+    }
 
     public static CategoryDTO mapCategoryToCategoryDTO(Category category) {
         CategoryDTO categoryDTO = new CategoryDTO();
@@ -150,10 +165,6 @@ public class Utils {
         Category category = new Category();
         category.setName(categoryDTO.getName());
         return category;
-    }
-
-    public static EventDTO mapEventEntityToEventDTO(Event updatedEvent) {
-        return null;
     }
 }
 
