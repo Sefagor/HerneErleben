@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ApiService from '../../../service/ApiService';
 import styles from './KommendeVeranstalltungen.module.css';
-import EventCard from '../../common/EcentCard/EventCard';
+import EventCard from '../../common/EventCard/EventCard';
 
 const UpcomingEventsSection = () => {
     const [events, setEvents] = useState([]);

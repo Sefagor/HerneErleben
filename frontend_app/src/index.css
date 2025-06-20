@@ -16,7 +16,6 @@ body {
   overflow: auto;
 }
 
-/* 1) Tüm belgeyi tam yüksekliğe çıkar */
 html, body, #root {
   height: 100%;
   margin: 0;
@@ -24,7 +23,6 @@ html, body, #root {
   scroll-behavior: smooth;
 }
 
-/* 2) Uygulama sarmalayıcısını flex kolona çevir */
 #root > .App {
   display: flex;
   flex-direction: column;
@@ -32,17 +30,15 @@ html, body, #root {
   overflow-y: visible;
 }
 
-/* 3) Ana içerik alanı esnetsin */
 .content {
-  flex: 1 0 auto; /* büyüsün, ama minimum boyu içeriğe göre */
+  flex: 1 0 auto;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
 }
 
-/* 4) Footer ise yalnızca içerik sonunda gözüksün */
 .App footer {
-  flex-shrink: 0; /* asla küçülmesin */
+  flex-shrink: 0;
 }
 
 
@@ -327,70 +323,6 @@ button[type="submit"]:hover {
 }
 
 
-/* ROOM SEARCH Component RESULT HOME PAGE STYLING */
-.room-results {
-  display: block;
-  flex-wrap: wrap;
-  margin: 10px 30px;
-}
-
-.room-list-item {
-  width: calc(95% - 20px);
-  height: 20vh;
-  margin: 5px auto;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  overflow: hidden;
-  display: flex;
-}
-
-.room-list-item-image {
-  width: 20%;
-  /* Adjust image width */
-  height: 20vh;
-}
-
-.room-details {
-  flex: 1;
-  /* Take remaining space */
-  padding: 15px;
-  margin-left: 10px;
-}
-
-.room-details h3 {
-  color: #007F86;
-}
-
-.room-detail-loading {
-  text-align: center;
-  font-size: 20px;
-  font-weight: 600;
-  margin-top: 20px;
-  color: #666;
-
-}
-
-.book-now-div {
-  align-self: center;
-}
-
-.book-now-button {
-  background-color: #007F86;
-  color: white;
-  border: none;
-  margin-right: 10px;
-  border-radius: 5px;
-  padding: 15px;
-  cursor: pointer;
-  font-weight: 600;
-  margin-right: 10px;
-}
-
-.book-now-button:hover {
-  background-color: rgb(34, 80, 128)
-}
-
-
 /*Home services section*/
 .home-services {
   font-weight: 800;
@@ -444,54 +376,6 @@ button[type="submit"]:hover {
 /*HOME PAGE STYLING ENDS HERE*/
 
 
-/*ALL ROOMS PAGE STYLING START*/
-
-.all-rooms {
-  margin: 50px 0px 90px 0px;
-}
-
-.all-rooms h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #007F86;
-}
-
-.all-room-filter-div {
-  margin-left: 5rem;
-}
-
-.all-room-filter-div label {
-  color: #007F86;
-}
-
-.filter-select-div {
-  width: 100%;
-  margin: 0px 0px 0px 4rem;
-}
-
-.add-room-button {
-  float: right;
-  margin-right: 70px;
-  font-weight: 600;
-}
-
-.all-room-filter-div label {
-  font-weight: 800;
-  font-size: 20px;
-
-}
-
-.all-room-filter-div select {
-  width: auto;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-
-/*ALL ROOMS PAGE STYLING ENDS*/
-
 /*PAGINATION COMPONENT STYLING*/
 .pagination-nav {
   display: flex;
@@ -528,156 +412,6 @@ button[type="submit"]:hover {
   background-color: #007F86;
   color: #fff;
 }
-
-/*ROOM DETAILS PAGE*/
-.room-details-booking {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 10px 90px 10px;
-  padding: 20px;
-}
-
-.room-details-image {
-  width: 400px;
-  height: 200px;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-.room-details-info {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.book-now-button {
-  background-color: #007F86;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.book-now-button:hover {
-  background-color: rgb(34, 80, 128);
-}
-
-
-.room-details-image {
-  width: 400px;
-  height: auto;
-}
-
-.room-details-info {
-  margin-top: 20px;
-}
-
-.booking-info {
-  margin-top: 20px;
-}
-
-.booking-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.booking-item {
-  margin-bottom: 10px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 5px;
-}
-
-.booking-number {
-  font-weight: bold;
-  color: #333;
-}
-
-.booking-text {
-  font-style: italic;
-  color: #666;
-}
-
-.detail-search-field {
-  /* flex: 0 0 calc(20.33% - 20px); */
-  margin: 5px;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.confirm-booking {
-  background-color: #007F86;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.guest-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-
-.guest-div {
-  margin-bottom: 10px;
-}
-
-.guest-div label {
-  margin-right: 10px;
-}
-
-.guest-div input[type="number"],
-.guest-div input[type="tel"] {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.confirm-booking {
-  background-color: #007F86;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.confirm-booking:hover {
-  background-color: rgb(34, 80, 128);
-}
-
-.booking-success-message {
-  text-align: center;
-  color: #45a049;
-  font-weight: 800;
-  font-size: 16px;
-}
-
-.error-message {
-  text-align: center;
-  color: #b10505;
-  font-weight: 800;
-  font-size: 20px;
-
-}
-
-.success-message {
-  text-align: center;
-  color: #051fb1;
-  font-weight: 800;
-  font-size: 20px;
-
-}
-
-/*ROOM DETAILS PAGE END HERE*/
-
 
 /**ADMIN STYLING*/
 
@@ -721,126 +455,6 @@ button[type="submit"]:hover {
 .admin-button:hover {
   background-color: rgb(34, 80, 128);
 }
-
-
-/* ROOM SEARCH RESULT */
-.book-now-button {
-  background-color: #007F86;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.edit-room-button {
-  background-color: #007F86;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.book-now-button:hover,
-.edit-room-button:hover {
-  opacity: 0.8;
-}
-
-/*EDIT ROOMPAGE STYLING*/
-
-.edit-room-container {
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.edit-room-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #007F86;
-}
-
-.error-message {
-  color: red;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.success-message {
-  color: green;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.edit-room-form .form-group {
-  margin-bottom: 15px;
-}
-
-.edit-room-form .form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.edit-room-form .form-group input,
-.edit-room-form .form-group textarea {
-  width: calc(100% - 22px);
-  padding: 10px;
-  border: .5px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
-  resize: none;
-}
-
-.edit-room-form .form-group textarea {
-  height: 100px;
-}
-
-.edit-room-form .form-group .room-photo,
-.edit-room-form .form-group .room-photo-preview {
-  width: 100%;
-  height: auto;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-}
-
-.update-button,
-.delete-button {
-  display: inline-block;
-  width: calc(50% - 10px);
-  padding: 10px 20px;
-  margin: 10px 5px 0;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.update-button {
-  background-color: #28a745;
-  color: white;
-}
-
-.delete-button {
-  background-color: #dc3545;
-  color: white;
-}
-
-.update-button:hover,
-.delete-button:hover {
-  opacity: 0.8;
-}
-
-/*B0oking & manage booking styling*/
 
 
 /* General Styling */

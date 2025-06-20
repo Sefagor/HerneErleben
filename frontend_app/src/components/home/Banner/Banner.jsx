@@ -24,7 +24,6 @@ const Banner = ({onSearch}) => (
             <img src={rathaus} alt="Rathaus Herne" className={styles.image}/>
         </div>
 
-        {/* Ortayı kesen, yüzen arama bileşeni */}
         <RoomSearch handleSearchResult={onSearch}/>
     </section>
 );
