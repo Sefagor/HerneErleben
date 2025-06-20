@@ -1,34 +1,31 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './components/common/Navbar';
-import FooterComponent from './components/common/Footer/Footer';
-//import LoginPage from './components/auth/LoginPage';
-//import RegisterPage from './components/auth/RegisterPage';
-import HomePage from './components/home/HomePage';
-//import FindBookingPage from './components/booking_rooms/MyEventPage/FindBookingPage';
-//import AdminPage from './components/admin/AdminPage';
-//import EditEventPage from './components/admin/EditEventPage';
-//import ManageBookingsPage from './components/admin/ManageBookingsPage';
-//import EditBookingPage from './components/admin/EditBookingPage';
-//import ProfilePage from './components/profile/ProfilePage';
-//import EditProfilePage from './components/profile/EditProfilePage';
-import { ProtectedRoute, AdminRoute } from './service/guard';
+import Navbar from './component/common/Navbar';
+import FooterComponent from './component/common/Footer/Footer';
+import LoginPage from './component/auth/LoginPage';
+import RegisterPage from './component/auth/RegisterPage';
+import HomePage from './component/home/HomePage';
+import FindBookingPage from './component/booking_rooms/MyEventPage/FindBookingPage';
+import AdminPage from './component/admin/AdminPage';
+import EditEventPage from './component/admin/EditEventPage';
+import ManageBookingsPage from './component/admin/ManageBookingsPage';
+import EditBookingPage from './component/admin/EditBookingPage';
+import ProfilePage from './component/profile/ProfilePage';
+import EditProfilePage from './component/profile/EditProfilePage';
+import { ProtectedRoute, AdminRoute } from '../../../swt2-kid-app-wandji/frontend_app/src/service/guard';
 import '@fontsource/delius';
-//import AllEventsPage from "./components/booking_rooms/AllEvents/AllEvents";
-//import EventDetailsPage from "./components/booking_rooms/EventDetails/EventDetailsPage";
+import AllEventsPage from "./component/booking_rooms/AllEvents/AllEvents";
+import EventDetailsPage from "./component/booking_rooms/EventDetails/EventDetailsPage";
 import 'leaflet/dist/leaflet.css';
-import AllEventsPage from "./components/booking-events/AllEvents/AllEvents";
-import FindBookingPage from "./components/booking-events/MyEventPage/FindBookingPage";
-import EventDetailsPage from "./components/booking-events/EventDetails/EventDetailsPage";
-//import ManageEventsPage from './components/admin/ManageEventsPage';
-//import AddEventPage from './components/admin/AddEventPage'
-//import ManageUsersPage from './components/admin/ManageUsersPage';
-//import AddUserPage from './components/admin/AddUserPage';
-//import EditUserPage from './components/admin/EditUserPage';
-//import BookingCalendarPage from './components/admin/BookingCalendarPage';
-//import AddBookingPage from './components/admin/AddBookingPage';
-//import AdminEmailPage from './components/admin/AdminEmailPage';
+import ManageEventsPage from './component/admin/ManageEventsPage';
+import AddEventPage from './component/admin/AddEventPage'
+import ManageUsersPage from './component/admin/ManageUsersPage';
+import AddUserPage from './component/admin/AddUserPage';
+import EditUserPage from './component/admin/EditUserPage';
+import BookingCalendarPage from './component/admin/BookingCalendarPage';
+import AddBookingPage from './component/admin/AddBookingPage';
+import AdminEmailPage from './component/admin/AdminEmailPage';
 
 
 function App() {
@@ -40,32 +37,27 @@ function App() {
                     <Routes>
                         {/* Public Routes */}
                         <Route exact path="/home" element={<HomePage />} />
-                        <Route path="/events" element={<AllEventsPage />} />
-                        <Route path="/find-booking" element={<FindBookingPage />} />
-                        {/*
                         <Route exact path="/login" element={<LoginPage />} />
                         <Route path="/register" element={<RegisterPage />} />
+                        <Route path="/events" element={<AllEventsPage />} />
+                        <Route path="/find-booking" element={<FindBookingPage />} />
                         <Route path="/admin/booking-calendar" element={<AdminRoute element={<BookingCalendarPage />} />} />
                         <Route path="/admin/add-booking" element={<AdminRoute element={<AddBookingPage />} />} />
                         <Route path="/admin/send-email" element={<AdminRoute element={<AdminEmailPage />} />} />
-                        */}
 
 
                         {/* Protected Routes */}
                         <Route path="/events/:eventId"
                                element={<ProtectedRoute element={<EventDetailsPage />} />}
                         />
-                        {/*
                         <Route path="/profile"
                                element={<ProtectedRoute element={<ProfilePage />} />}
                         />
                         <Route path="/edit-profile"
                                element={<ProtectedRoute element={<EditProfilePage />} />}
-
                         />
-                        */}
 
-                        {/* Admin Routes
+                        {/* Admin Routes */}
                         <Route path="/admin"
                                element={<AdminRoute element={<AdminPage />} />}
                         />
@@ -90,7 +82,6 @@ function App() {
                         <Route path="/admin/edit-booking/:bookingCode"
                                element={<AdminRoute element={<EditBookingPage />} />}
                         />
-                        */}
 
                         {/* Fallback Route */}
                         <Route path="*" element={<Navigate to="/login" />} />
