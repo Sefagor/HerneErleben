@@ -20,12 +20,11 @@ public class Response {
     private String bookingConfirmationCode;
 
     private UserDTO user;
-
-  //  private EventDTO event;
-  //private BookingDTO booking;
+    private EventDTO event;
+    private BookingDTO booking;
     private List<UserDTO> userList;
-    //private List<EventDTO> eventList;
-    // private List<BookingDTO> bookingList;
+    private List<EventDTO> eventList;
+    private List<BookingDTO> bookingList;
 
 
 }

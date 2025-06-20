@@ -3,7 +3,7 @@ package de.fh.dortmund.eventApp.controller;
 
 import de.fh.dortmund.eventApp.dto.Response;
 import de.fh.dortmund.eventApp.entity.Event;
-//import de.fh.dortmund.eventApp.requestBody.EmailContent;
+import de.fh.dortmund.eventApp.requestBody.EmailContent;
 import de.fh.dortmund.eventApp.requestBody.EventBody;
 import de.fh.dortmund.eventApp.service.EmailService;
 import de.fh.dortmund.eventApp.service.EventService;
@@ -77,10 +77,10 @@ public class EventController {
     }
 
 
-    /*@PreAuthorize("hasAuthority('ADMIN')")
-    /@PostMapping("notify")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping("notify")
     public void sendEmailToEveryUser(@Valid EmailContent emailContent) {
         emailService.sendToEveryone(emailContent);
-    }*/
+    }
 
 }

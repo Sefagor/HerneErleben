@@ -1,9 +1,7 @@
 package de.fh.dortmund.eventApp.utils;
 
-import de.fh.dortmund.eventApp.dto.UserDTO;
-import de.fh.dortmund.eventApp.entity.Booking;
-import de.fh.dortmund.eventApp.entity.Feedback;
-import de.fh.dortmund.eventApp.entity.User;
+import de.fh.dortmund.eventApp.dto.*;
+import de.fh.dortmund.eventApp.entity.*;
 
 import java.security.SecureRandom;
 import java.util.List;
@@ -37,7 +35,22 @@ public class Utils {
         return userDTO;
     }
 
+    public static EventDTO mapEventEntityToEventDTO(Event event) {
+        EventDTO eventDTO = new EventDTO();
 
+        eventDTO.setId(event.getId());
+        eventDTO.setEventDate(event.getEventDate());
+        eventDTO.setStatus(event.getStatus());
+        eventDTO.setEventPhoto(event.getEventPhoto());
+        eventDTO.setEventDescription(event.getEventDescription());
+        eventDTO.setMaxParticipant(event.getMaxParticipant());
+        eventDTO.setEventName(event.getEventName());
+        eventDTO.setEventLocation(mapLocationEntityToLocationDTO(event.getEventLocation()));
+        eventDTO.setStartTime(event.getStartTime());
+        eventDTO.setEndTime(event.getEndTime());
+        eventDTO.setCategories(event.getCategory().stream().map(Utils::mapCategoryToCategoryDTO).toList());
+        return eventDTO;
+    }
 
     public static CategoryDTO mapCategoryToCategoryDTO(Category category) {
         CategoryDTO categoryDTO = new CategoryDTO();
