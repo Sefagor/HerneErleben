@@ -1,7 +1,7 @@
 // src/ProtectedRoute.js
 import React from 'react';
 import {Navigate, useLocation} from 'react-router-dom';
-import ApiService from './ApiService';
+import ApiService from '../../../../swt2-kids-app-2/frontend/src/service/ApiService';
 
 
 export const ProtectedRoute = ({element: Component}) => {

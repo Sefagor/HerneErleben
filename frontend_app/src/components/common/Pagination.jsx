@@ -8,6 +8,7 @@ const Pagination = ({
                         currentPage,
                         paginate
                     }) => {
+    // Desteklenen prop isimleri: roomsPerPage/totalRooms veya itemsPerPage/totalItems
     const perPage = roomsPerPage || itemsPerPage;
     const total = totalRooms || totalItems;
     const pageNumbers = [];

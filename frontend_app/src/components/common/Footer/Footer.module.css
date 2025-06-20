@@ -1,7 +1,6 @@
 /* Footer.module.css */
 
-/* Basic body */
-
+/* Temel gövde */
 .footer {
     background-color: #2d2d2d;
     color: #ccc;
@@ -9,25 +8,24 @@
     line-height: 1.6;
 }
 
-/* Top spacer bar */
-
+/* Üst boşluk çubuğu */
 .container_schmuckleiste_footer {
     height: 21px;
 }
 
-/* Main content area */
+/* Ana içerik alanı */
 .container_footer {
     padding: 3rem 1rem;
 }
 
-/* Flex container: 4 columns */
+/* Flex konteyner: 4 kolon */
 .container_footer .container {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
 }
 
-/* Each column box */
+/* Her sütun kutusu */
 .box_footer {
     flex: 1 1 200px; /* min-width sağlamak için */
     display: flex;
@@ -35,13 +33,13 @@
     gap: 0.75rem;
 }
 
-/* Column for logo, address, etc. */
+/* Logo + adres vs. sütunu */
 .box_footer_logo img {
     max-width: 120px;
     margin-bottom: 1rem;
 }
 
-/* Address, phone, internet blocks */
+/* Adres, telefon, internet blokları */
 .box_adresse_footer,
 .box_telefon_footer,
 .box_internet_footer {
@@ -50,7 +48,7 @@
     color: #aaa;
 }
 
-/* Link lists */
+/* Link listeleri */
 .footer_links,
 .footer_legal {
     list-style: none;
@@ -75,7 +73,7 @@
     color: #fff;
 }
 
-/* Social icons grid */
+/* Sosyal ikonlar ızgarası */
 .container_box_icons_footer {
     display: grid;
     grid-template-columns: repeat(3, 44px);
@@ -88,14 +86,14 @@
     display: block;
 }
 
-/* Clearfix (if needed) */
+/* Clearfix (eğer gerekiyorsa) */
 .clearfix::after {
     content: "";
     display: table;
     clear: both;
 }
 
-/* Footer copyright section */
+/* Alt copyright bölümü */
 .container_footer_bottom {
     display: flex;
     align-items: center;
@@ -104,7 +102,7 @@
     padding: 1rem;
 }
 
-/* Centered copyright text */
+/* Ortadaki copyright metni */
 .footer_copy {
     display: flex;
     align-items: center;
@@ -113,13 +111,13 @@
     font-size: 0.75rem;
 }
 
-/* Back-to-top icon */
+/* Back-to-top ikonu */
 .pfeil_seitenanfang img {
     width: 24px;
     height: 24px;
 }
 
-/* Hidden skip link (for accessibility) */
+/* Gizli atlama bağlantısı (erişilebilirlik için) */
 .sprunglinks_unsichtbar {
     position: absolute;
     left: -9999px;
@@ -129,7 +127,7 @@
     overflow: hidden;
 }
 
-/* Responsive: stack columns vertically on mobile */
+/* Responsive: mobilde kolonları alt alta getir */
 @media (max-width: 768px) {
     .container_footer .container {
         flex-direction: column;

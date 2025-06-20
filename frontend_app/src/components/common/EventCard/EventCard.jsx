@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 import styles from './EventCard.module.css';
 import {FaCalendarAlt, FaMapMarkerAlt, FaRegCalendarPlus} from 'react-icons/fa';
 
-// StatusFarben
+// Statusfarben
 const statusColors = {
     ACTIVE: 'green',
     CANCELLED: 'red',

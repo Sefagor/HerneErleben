@@ -31,8 +31,7 @@
     object-fit: cover;
 }
 
-/* Floating search box in the center */
-
+/* Ortadaki yüzen arama kutusu */
 .searchOverlay {
     position: absolute;
     top: 60%;
@@ -45,8 +44,7 @@
     z-index: 2;
 }
 
-/* Text and button styles (remained the same) */
-
+/* Metin ve buton stilleri (aynı kaldı) */
 .left h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
@@ -77,8 +75,7 @@
     background-color: #000000;
 }
 
-/* Responsive: overlay stacks from the bottom */
-
+/* Responsive: overlay alttan dizilir */
 @media (max-width: 768px) {
     .banner {
         flex-direction: column;
