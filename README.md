@@ -1,88 +1,42 @@
-# Template repository for the Software Engineering lecture
+# Event Management Backen
 
-> [!IMPORTANT]
-> Replace this README with a detailed description of your project, your team, and instructions on how to run it.
+## Installation
 
-> [!IMPORTANT]
-> If you choose to keep your repository private, make sure to invite all your team members and teaching staff. Ask for their usernames if needed
+* Navigate to the directory with your docker-compose.yaml file then build and run the services
 
-Provide a general introduction to your project. Describe the purpose, goals, and the technologies used. Explain the value your project offers.
+```
+docker compose up --build
 
-## Team
-List the team members involved in the project:
-
-Team Leader: [Name]
-
-Members: [Name1], [Name2], [Name3]
-(Expand this list as necessary)
-
-
-
-## Quickstart
-
-This section outlines the steps required to get your project up and running quickly:
-
-```bash,ignore
-# Example: Start a PostgreSQL database using Docker
-$ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
-
-# Example: Start the project (e.g., using Spring Boot)
-$ ./mvnw spring-boot:ru
 ```
 
-## Prerequisites
+### Some infos
 
-Detail all the necessary prerequisites for running your project, such as:
+* Port Conflict
+    * Open docker-compose.yaml.
+    * Locate the ports: section.
+    * Change only the first number (before the colon **:** ) to another unused port.
 
-Operating System: (e.g., Linux, macOS, Windows)
+### Spring Boot App
 
-Software: Docker, Java, Maven
+* The Spring Boot application runs by default on *http://localhost:8090*
+* to test it
+    * open Postmann
+    * send a GET request to *http://localhost:8090/events/all*
 
-Ports: (e.g., port 8080, if applicable)
+### Herne Backend
 
-## Installation and Setup
+* The herner Backend runs by default on *http://localhost:8091*
+* to test it
+    * open Postmann
+    * send a POST request to *http://localhost:8091/send*
+    * don't forget to pass the required arguments :)
 
-Provide step-by-step instructions on how to clone the repository, install the project, and configure it:
+### Database
 
-1. Clone the repository:
-```bash,ignore
-$ git clone https://github.com/YourRepository.git
-```
+* The Database base (PostGreSql) run on the port 5433
+    * You can use mariadb to test the connection and see the contains of the database
 
-2. Navigate to the project directory:
-```bash,ignore
-$ cd ProjectName
-```
+### SMTP4Dev
 
-3. Adjust configuration files:
-
-Modify configuration files (e.g., `.env`, `application.properties`) as required.
-
-
-## Running the Project
-
-Explain in detail how to run the project, including:
-
-Starting the database
-
-Initializing data (if needed, via scripts)
-
-Starting the server
-
-```bash,ignore
-# Example: Initialize the database
-$ ./init-db.sh
-
-# Start the project
-$ ./mvnw spring-boot:run
-```
-
-## Project structure
-Provide an overview of the directory structure to help contributors navigate the project:
-```bash,ignore
-ProjectName/
-├── project_one/        # Description of this subproject
-├── docs/               # Documentation
-├── tests/              # Test cases
-└── README.md           # This file
-```
+* The development email interface is available at: *http://localhost:5000
+* When you call the /events/all endpoint (or trigger any email-sending logic), you should see a new email appear here.
