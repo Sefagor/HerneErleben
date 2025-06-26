@@ -67,7 +67,7 @@ html, body, #root {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff8eb;
+  background: #fffef8;
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
@@ -98,7 +98,7 @@ html, body, #root {
 }
 
 .nav-herne-logo {
-  width: 50px;
+  width: 310px;
 }
 
 /* Menü */

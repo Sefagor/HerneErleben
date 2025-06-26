@@ -2,7 +2,6 @@ import axios from "axios";
 
 export default class ApiService {
     static BASE_URL = "http://localhost:8090";
-    static HERNE_URL = "http://localhost:8091";
 
     static getHeader() {
         const token = localStorage.getItem("token");
@@ -120,31 +119,9 @@ static async addEvent(formData) {
     return response.data;
 }
 
-
-    static async getRoomTypes() {
-        const response = await axios.get(
-            `${this.BASE_URL}/rooms/types`
-        );
-        return response.data;
-    }
-
-    static async getAllRooms() {
-        const response = await axios.get(
-            `${this.BASE_URL}/rooms/all`
-        );
-        return response.data;
-    }
-
     static async getAllEvents() {
         const response = await axios.get(
             `${this.BASE_URL}/events/all`
-        );
-        return response.data;
-    }
-
-    static async getRoomById(roomId) {
-        const response = await axios.get(
-            `${this.BASE_URL}/rooms/room-by-id/${roomId}`
         );
         return response.data;
     }
@@ -165,29 +142,6 @@ static async addEvent(formData) {
         return response.data;
     }
 
-    // UPDATE event
-    static async updateEvent(eventId, formData) {
-        const response = await axios.put(
-            `${this.BASE_URL}/events/update/${eventId}`,
-            formData,
-            {
-                headers: {
-                    ...this.getHeader(),
-                    "Content-Type": "multipart/form-data",
-                },
-            }
-        );
-        return response.data;
-    }
-
-    // DELETE event
-    static async deleteEvent(eventId) {
-        const response = await axios.delete(
-            `${this.BASE_URL}/events/delete/${eventId}`,
-            { headers: this.getHeader() }
-        );
-        return response.data;
-    }
     static async updateUser(userId, profileData) {
         const response = await axios.put(
             `${this.BASE_URL}/users/update/${userId}`,
@@ -205,39 +159,7 @@ static async sendEmailToAll(emailContent) {
     return response.data;
 }
 
-
-/*
-    static async updateRoom(roomId, formData) {
-        const response = await axios.put(
-            `${this.BASE_URL}/rooms/update/${roomId}`,
-            formData,
-            {
-                headers: {
-                    ...this.getHeader(),
-                    "Content-Type": "multipart/form-data",
-                },
-            }
-        );
-        return response.data;
-    }
-
-    static async deleteRoom(roomId) {
-        const response = await axios.delete(
-            `${this.BASE_URL}/rooms/delete/${roomId}`,
-            {headers: this.getHeader()}
-        );
-        return response.data;
-    }
-*/
     /** BOOKINGS */
-    static async bookRoom(roomId, userId, booking) {
-        const response = await axios.post(
-            `${this.BASE_URL}/bookings/book-room/${roomId}/${userId}`,
-            booking,
-            {headers: this.getHeader()}
-        );
-        return response.data;
-    }
 
     static async bookEvent(eventId, userId, booking) {
         const response = await axios.post(

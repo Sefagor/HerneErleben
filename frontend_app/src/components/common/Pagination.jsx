@@ -8,7 +8,7 @@ const Pagination = ({
                         currentPage,
                         paginate
                     }) => {
-// Unterstützte Prop-Namen: roomsPerPage/totalRooms oder itemsPerPage/totalItems    const perPage = roomsPerPage || itemsPerPage;
+    const perPage = roomsPerPage || itemsPerPage;
     const total = totalRooms || totalItems;
     const pageNumbers = [];
 

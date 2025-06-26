@@ -1,12 +1,12 @@
 // frontend_app/src/common/EventSearch.jsx
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ApiService from '../../../service/ApiService';
 import styles from './EventSearch.module.css';
-import {FaCalendarAlt, FaMapMarkerAlt, FaTags} from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt, FaTags } from 'react-icons/fa';
 
-const EventSearch = ({handleSearchResult, inline = false}) => {
+const EventSearch = ({ handleSearchResult, inline = false }) => {
     const [location, setLocation] = useState('');
     const [category, setCategory] = useState('');
     const [dateType, setDateType] = useState('today');
@@ -14,6 +14,7 @@ const EventSearch = ({handleSearchResult, inline = false}) => {
     const [endDate, setEndDate] = useState(null);
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState('');
+    const errorTimeoutRef = useRef();
 
     useEffect(() => {
         ApiService.getEventCategories()
@@ -21,14 +22,20 @@ const EventSearch = ({handleSearchResult, inline = false}) => {
             .catch(err => console.error(err));
     }, []);
 
+    useEffect(() => {
+        // cleanup on unmount
+        return () => clearTimeout(errorTimeoutRef.current);
+    }, []);
+
     const showError = (msg, timeout = 5000) => {
+        clearTimeout(errorTimeoutRef.current);
         setError(msg);
-        setTimeout(() => setError(''), timeout);
+        errorTimeoutRef.current = setTimeout(() => setError(''), timeout);
     };
 
     const onSearch = async () => {
         if (!location || !category) {
-            return showError('Bitte wählen Sie Datum und Kategorie.');
+            return showError('Bitte wählen Sie Ort und Kategorie.');
         }
 
         let from, to;
@@ -38,11 +45,12 @@ const EventSearch = ({handleSearchResult, inline = false}) => {
                 from = to = today.toISOString().slice(0, 10);
                 break;
             case 'weekend': {
-                const day = today.getDay();
+                // gelecek cumartesi ve pazar
                 const sat = new Date(today);
-                sat.setDate(today.getDate() + ((6 - day + 7) % 7));
-                const sun = new Date(today);
-                sun.setDate(today.getDate() + ((7 - day + 7) % 7));
+                const day = sat.getDay();
+                sat.setDate(sat.getDate() + ((6 - day + 7) % 7));
+                const sun = new Date(sat);
+                sun.setDate(sat.getDate() + 1);
                 from = sat.toISOString().slice(0, 10);
                 to = sun.toISOString().slice(0, 10);
                 break;
@@ -59,14 +67,18 @@ const EventSearch = ({handleSearchResult, inline = false}) => {
         }
 
         try {
-            const params = {location, category, from, to};
-            const {statusCode, eventList} = await ApiService.getEventsByParams(params);
-            if (statusCode === 200) {
-                if (!eventList.length) return showError('Das Veranstalltung konnte nicht gefunden werden.');
-                handleSearchResult(eventList);
+            const params = { location, category, from, to };
+            const { statusCode, eventList } = await ApiService.getEventsByParams(params);
+            if (statusCode !== 200) {
+                return showError('Fehler beim Abrufen der Veranstaltungen.');
             }
-        } catch {
-            showError('Ein Unbekannter Fehler passiert.');
+            if (!eventList.length) {
+                return showError('Die Veranstaltung konnte nicht gefunden werden.');
+            }
+            handleSearchResult(eventList);
+        } catch (err) {
+            console.error(err);
+            showError('Ein unbekannter Fehler ist passiert.');
         }
     };
 
@@ -76,7 +88,7 @@ const EventSearch = ({handleSearchResult, inline = false}) => {
             <div className={styles.item}>
                 <div className={styles.label}>Ort</div>
                 <div className={styles.control}>
-                    <FaMapMarkerAlt className={styles.icon}/>
+                    <FaMapMarkerAlt className={styles.icon} />
                     <input
                         type="text"
                         value={location}
@@ -91,7 +103,7 @@ const EventSearch = ({handleSearchResult, inline = false}) => {
             <div className={styles.item}>
                 <div className={styles.label}>Kategorie</div>
                 <div className={styles.control}>
-                    <FaTags className={styles.icon}/>
+                    <FaTags className={styles.icon} />
                     <select
                         value={category}
                         onChange={e => setCategory(e.target.value)}
@@ -99,17 +111,20 @@ const EventSearch = ({handleSearchResult, inline = false}) => {
                     >
                         <option value="" disabled>Wählen Sie</option>
                         {categories.map(cat => (
-                            <option key={cat} value={cat}>{cat}</option>
+                            // API'niz kullandığına göre cat.id ve cat.name örneğiyle
+                            <option key={cat.id} value={cat.name}>
+                                {cat.name}
+                            </option>
                         ))}
                     </select>
                 </div>
             </div>
 
-            {/* Genauer Zeitraum */}
+            {/* Zeitraum */}
             <div className={styles.item}>
                 <div className={styles.label}>Zeitraum</div>
                 <div className={styles.control}>
-                    <FaCalendarAlt className={styles.icon}/>
+                    <FaCalendarAlt className={styles.icon} />
                     <select
                         value={dateType}
                         onChange={e => setDateType(e.target.value)}
@@ -137,9 +152,12 @@ const EventSearch = ({handleSearchResult, inline = false}) => {
             </div>
 
             {/* Search Button */}
-            <button className={styles.button} onClick={onSearch}>
+            <button type="button" className={styles.button} onClick={onSearch}>
                 Suchen
             </button>
+
+            {/* Hata mesajı */}
+            {error && <div className={styles.error}>{error}</div>}
         </div>
     );
 };

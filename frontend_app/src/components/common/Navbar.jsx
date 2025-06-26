@@ -20,8 +20,7 @@ function Navbar() {
         <nav className="navbar">
             <div className="nav-container">
                 <div className="navbar-brand">
-                    <img src="./assets/images/hernelogo.png" alt="Herne Logo" className="nav-herne-logo"/>
-                    <NavLink to="/home">Stadt Herne</NavLink>
+                    <img src="https://www.herne.de/media/template/images/stadt_herne_logo_header.svg" alt="Herne Logo" className="nav-herne-logo"/>
                 </div>
                 <ul className="navbar-ul">
                     <li><NavLink to="/home" activeclassname="active">Home</NavLink></li>

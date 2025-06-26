@@ -1,31 +1,27 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './component/common/Navbar';
-import FooterComponent from './component/common/Footer/Footer';
-import LoginPage from './component/auth/LoginPage';
-import RegisterPage from './component/auth/RegisterPage';
-import HomePage from './component/home/HomePage';
-import FindBookingPage from './component/booking_rooms/MyEventPage/FindBookingPage';
-import AdminPage from './component/admin/AdminPage';
-import EditEventPage from './component/admin/EditEventPage';
-import ManageBookingsPage from './component/admin/ManageBookingsPage';
-import EditBookingPage from './component/admin/EditBookingPage';
-import ProfilePage from './component/profile/ProfilePage';
-import EditProfilePage from './component/profile/EditProfilePage';
-import { ProtectedRoute, AdminRoute } from '../../../swt2-kid-app-wandji/frontend_app/src/service/guard';
+import Navbar from './components/common/Navbar';
+import FooterComponent from './components/common/Footer/Footer';
+import LoginPage from './components/auth/LoginPage';
+import RegisterPage from './components/auth/RegisterPage';
+import HomePage from './components/home/HomePage';
+import FindBookingPage from './components/booking-events/MyEventPage/FindBookingPage';
+import AdminPage from './components/admin/AdminPage';
+import ManageBookingsPage from './components/admin/ManageBookingsPage';
+import EditBookingPage from './components/admin/EditBookingPage';
+import ProfilePage from './components/profile/ProfilePage';
+import EditProfilePage from './components/profile/EditProfilePage';
+import { ProtectedRoute, AdminRoute } from './service/guard';
 import '@fontsource/delius';
-import AllEventsPage from "./component/booking_rooms/AllEvents/AllEvents";
-import EventDetailsPage from "./component/booking_rooms/EventDetails/EventDetailsPage";
+import AllEventsPage from "./components/booking-events/AllEvents/AllEvents";
+import EventDetailsPage from "./components/booking-events/EventDetails/EventDetailsPage";
 import 'leaflet/dist/leaflet.css';
-import ManageEventsPage from './component/admin/ManageEventsPage';
-import AddEventPage from './component/admin/AddEventPage'
-import ManageUsersPage from './component/admin/ManageUsersPage';
-import AddUserPage from './component/admin/AddUserPage';
-import EditUserPage from './component/admin/EditUserPage';
-import BookingCalendarPage from './component/admin/BookingCalendarPage';
-import AddBookingPage from './component/admin/AddBookingPage';
-import AdminEmailPage from './component/admin/AdminEmailPage';
+import ManageUsersPage from './components/admin/ManageUsersPage';
+import AddUserPage from './components/admin/AddUserPage';
+import EditUserPage from './components/admin/EditUserPage';
+import BookingCalendarPage from './components/admin/BookingCalendarPage';
+import AdminEmailPage from './components/admin/AdminEmailPage';
 
 
 function App() {
@@ -42,7 +38,6 @@ function App() {
                         <Route path="/events" element={<AllEventsPage />} />
                         <Route path="/find-booking" element={<FindBookingPage />} />
                         <Route path="/admin/booking-calendar" element={<AdminRoute element={<BookingCalendarPage />} />} />
-                        <Route path="/admin/add-booking" element={<AdminRoute element={<AddBookingPage />} />} />
                         <Route path="/admin/send-email" element={<AdminRoute element={<AdminEmailPage />} />} />
 
 
@@ -62,20 +57,10 @@ function App() {
                                element={<AdminRoute element={<AdminPage />} />}
                         />
 
-                        <Route path="/admin/add-event"
-                               element={<AdminRoute element={<AddEventPage />} />}
-                        />
-                        <Route path="/admin/manage-events"
-                               element={<AdminRoute element={<ManageEventsPage />} />}
-                        />
                         <Route path="/admin/manage-users" element={<AdminRoute element={<ManageUsersPage />} />} />
                         <Route path="/admin/add-user" element={<AdminRoute element={<AddUserPage />} />} />
                         <Route path="/admin/edit-user/:userId" element={<AdminRoute element={<EditUserPage />} />} />
 
-
-                        <Route path="/admin/edit-event/:eventId"
-                               element={<AdminRoute element={<EditEventPage />} />}
-                        />
                         <Route path="/admin/manage-bookings"
                                element={<AdminRoute element={<ManageBookingsPage />} />}
                         />
