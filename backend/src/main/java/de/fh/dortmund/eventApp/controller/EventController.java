@@ -1,7 +1,9 @@
 package de.fh.dortmund.eventApp.controller;
 
 
+import de.fh.dortmund.eventApp.dto.CategoryDTO;
 import de.fh.dortmund.eventApp.dto.Response;
+import de.fh.dortmund.eventApp.entity.Category;
 import de.fh.dortmund.eventApp.entity.Event;
 import de.fh.dortmund.eventApp.requestBody.EmailContent;
 import de.fh.dortmund.eventApp.requestBody.EventBody;
@@ -12,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/events")
@@ -41,6 +45,10 @@ public class EventController {
     public ResponseEntity<Response> getAllEvents() {
         Response response = eventService.getAllEvents();
         return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
+    @GetMapping("/categories")
+    public List<CategoryDTO> getAllCategories(){
+        return eventService.getAllCategories();
     }
 
 
