@@ -59,7 +59,7 @@ public class UserController {
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
-   @PostMapping("send-feedback")
+    @PostMapping("send-feedback")
     @PreAuthorize("hasAuthority('USER')")
     public void sendFeedback(@RequestBody FeedbackBody feedbackBody, @AuthenticationPrincipal User user) {
         // TODO: send feedback

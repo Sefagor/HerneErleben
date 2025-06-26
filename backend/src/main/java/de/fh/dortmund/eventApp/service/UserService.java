@@ -256,7 +256,15 @@ public class UserService {
 
 
 
-
+    public void sendFeedback(FeedbackBody feedbackBody) {
+        Event event = eventRepository.findById(feedbackBody.getEventId()).orElseThrow(DataNotFoundException::new);
+        Feedback feedback = new Feedback();
+        feedback.setComment(feedbackBody.getComment());
+        feedback.setRating(feedback.getRating());
+        feedback.setSubmissionDate(LocalDate.now());
+        feedback.setEvent(event);
+        feedbackRepository.save(feedback);
+    }
 
 
 

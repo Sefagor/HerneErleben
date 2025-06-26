@@ -3,6 +3,8 @@ services:
     build: ./backend_herne
     ports:
       - "8091:8081"
+    depends_on:
+      - mosquitto
 
   backend:
     build: ./backend
@@ -10,6 +12,18 @@ services:
       - "8090:8080"
     depends_on:
       - database
+
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    restart: always
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto:/etc/mosquitto
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+
 
   database:
     image: postgres:latest
@@ -23,6 +37,15 @@ services:
     ports:
       - "5433:5432"
 
+  smtp4dev:
+    image: rnwood/smtp4dev:latest
+    restart: always
+    ports:
+      - "5000:80"
+      - "2525:25"
+
+    volumes:
+      - smtp4dev-data:/smtp4dev
 volumes:
   smtp4dev-data:
   test:
