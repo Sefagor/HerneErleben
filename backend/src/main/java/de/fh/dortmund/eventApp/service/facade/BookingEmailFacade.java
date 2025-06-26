@@ -22,7 +22,7 @@ public class BookingEmailFacade {
     }
 
     public Response makeBooking(Long userID, Long eventID) {
-        Response response = bookingService.bookAnEvent(userID, eventID);
+        Response response = bookingService.bookAnEvent(eventID, userID);
         if (response.getStatusCode() == 200) {
             emailService.sendConfirmationEmail(response.getMetadata(), response.getBookingConfirmationCode(), eventService.findEventById(eventID));
         }
