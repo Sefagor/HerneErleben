@@ -1,4 +1,4 @@
-# Event Management Backen
+# Event Management Backend
 
 ## Installation
 

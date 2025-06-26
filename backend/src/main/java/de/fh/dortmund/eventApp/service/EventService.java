@@ -1,10 +1,12 @@
 package de.fh.dortmund.eventApp.service;
 
+import de.fh.dortmund.eventApp.dto.CategoryDTO;
 import de.fh.dortmund.eventApp.dto.EventDTO;
 import de.fh.dortmund.eventApp.dto.Response;
 import de.fh.dortmund.eventApp.entity.Event;
 import de.fh.dortmund.eventApp.exception.CustomException;
 import de.fh.dortmund.eventApp.repo.BookingRepository;
+import de.fh.dortmund.eventApp.repo.CategoryRepository;
 import de.fh.dortmund.eventApp.repo.EventRepository;
 import de.fh.dortmund.eventApp.requestBody.EventBody;
 import de.fh.dortmund.eventApp.utils.Utils;
@@ -25,10 +27,11 @@ public class EventService {
 
     private final EventRepository eventRepository;
     private final BookingRepository bookingRepository;
-
-    public EventService(EventRepository eventRepository, BookingRepository bookingRepository) {
+    private final CategoryRepository categoryRepository;
+    public EventService(EventRepository eventRepository, BookingRepository bookingRepository, CategoryRepository categoryRepository) {
         this.eventRepository = eventRepository;
         this.bookingRepository = bookingRepository;
+        this.categoryRepository = categoryRepository;
     }
 
 
@@ -248,4 +251,10 @@ public class EventService {
     }
 
 
+    public List<CategoryDTO> getAllCategories() {
+        return categoryRepository.findAll().stream()
+                .map(Utils::mapCategoryToCategoryDTO)
+                .distinct()
+                .toList();
+    }
 }
