@@ -45,8 +45,8 @@ public class PublishController {
             @ApiResponse(responseCode = "201", description = "Event sent successfully to the mqtt canal"),
             @ApiResponse(responseCode = "500", description = "Event couldn't be sent")
     })
-    @PostMapping(path = "/send", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(path = "/send", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> sendMessage(
             @Parameter(name = "Event as json") @RequestPart("event") String eventJson,
             @Parameter(name = "Event Image") @RequestPart("image") MultipartFile imageFile) throws IOException {

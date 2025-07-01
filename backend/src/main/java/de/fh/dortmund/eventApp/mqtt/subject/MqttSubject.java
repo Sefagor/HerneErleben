@@ -46,7 +46,7 @@ public class MqttSubject implements Subject {
 
         @Override
         public void connectionLost(Throwable cause) {
-            System.out.println("Test du dispatcher");
+            System.out.println("Dispatcher test");
         }
 
 
@@ -60,7 +60,7 @@ public class MqttSubject implements Subject {
 
         @Override
         public void deliveryComplete(IMqttDeliveryToken token) {
-            System.out.println("Test du dispatcher" + token.toString());
+            System.out.println("Dispatcher test" + token.toString());
 
         }
     }

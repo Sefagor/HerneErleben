@@ -40,3 +40,8 @@ docker compose up --build
 
 * The development email interface is available at: *http://localhost:5000
 * When you call the /events/all endpoint (or trigger any email-sending logic), you should see a new email appear here.
+
+### Swagger
+ *  Swagger can be reached at the addresses 
+   * http://localhost:8090/swagger-ui/index.html (Backend) 
+   * http://localhost:8091/swagger-ui/index.html (Backend herne)

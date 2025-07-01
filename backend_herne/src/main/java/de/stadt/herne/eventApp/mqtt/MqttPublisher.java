@@ -31,15 +31,10 @@ public class MqttPublisher {
             client.publish(topic, mqttMessage);
 
             client.disconnect();
-            System.out.println("Message publié : " + message);
+            System.out.println("Message published : " + message);
         } catch (MqttException e) {
             e.printStackTrace();
         }
-    }
-
-    public void publishJsonFile(Path path) throws IOException {
-        String json = Files.readString(path);
-        publish(json);  // utilise la méthode publish(String) déjà définie
     }
 
 }

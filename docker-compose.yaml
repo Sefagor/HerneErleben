@@ -12,6 +12,7 @@ services:
       - "8090:8080"
     depends_on:
       - database
+      - mosquitto
 
   mosquitto:
     image: eclipse-mosquitto:latest
