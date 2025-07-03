@@ -52,7 +52,6 @@ public class MqttSubject implements Subject {
 
         @Override
         public void messageArrived(String topic, MqttMessage msg) throws Exception {
-            System.out.println("Message Arrived");
             notifyObservers(msg, observers);
 
 
@@ -60,8 +59,6 @@ public class MqttSubject implements Subject {
 
         @Override
         public void deliveryComplete(IMqttDeliveryToken token) {
-            System.out.println("Dispatcher test" + token.toString());
-
         }
     }
 

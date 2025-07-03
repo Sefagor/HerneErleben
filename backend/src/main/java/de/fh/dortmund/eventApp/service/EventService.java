@@ -5,6 +5,7 @@ import de.fh.dortmund.eventApp.dto.EventDTO;
 import de.fh.dortmund.eventApp.dto.Response;
 import de.fh.dortmund.eventApp.entity.Event;
 import de.fh.dortmund.eventApp.exception.CustomException;
+import de.fh.dortmund.eventApp.handler.*;
 import de.fh.dortmund.eventApp.repo.BookingRepository;
 import de.fh.dortmund.eventApp.repo.CategoryRepository;
 import de.fh.dortmund.eventApp.repo.EventRepository;
@@ -17,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -117,18 +117,20 @@ public class EventService {
 
         try {
             Event event = eventRepository.findById(eventID).orElseThrow(() -> new CustomException("Event Not Found"));
+
+            if (!photo.isEmpty()) {
+                body.setEventPhoto(Base64.getEncoder().encodeToString(photo.getBytes()));
+
+            }
+
             if (body.getEventDate() != null) {
                 event.setEventDate(body.getEventDate());
             }
             if (body.getStatus() != null) event.setStatus(body.getStatus());
             if (body.getEventLocation() != null) event.setEventLocation(body.getEventLocation());
             if (body.getEventPhoto() != null) event.setEventPhoto(body.getEventPhoto());
-            if (body.getMaxParticipant() != event.getMaxParticipant() && body.getMaxParticipant() > 0) {
-                event.setMaxParticipant(body.getMaxParticipant());
-            }
-            if (!photo.isEmpty()) {
-                Base64.getEncoder().encodeToString(photo.getBytes());
-            }
+
+
             Event updatedEvent = eventRepository.save(event);
             EventDTO eventDTO = Utils.mapEventEntityToEventDTO(updatedEvent);
 
@@ -156,7 +158,21 @@ public class EventService {
             convertAndSaveEventBodyToEvent(body);
             return;
         }
-        if(body.getEventName() != null){
+        System.out.println(event.getEventName());
+        System.out.println("After");
+        BaseHandler baseHandler = new EventNameBaseHandler();
+       baseHandler
+                .next(new EventDescriptionBaseHandler())
+                .next(new EventLocationBaseHandler())
+                .next(new EventMaxParticipantBaseHandler())
+                .next(new EventDateBaseHandler())
+                .next(new EventTimeBaseHandler())
+                .next(new EventStatusBaseHandler())
+                .next(new EventPhotoBaseHandler())
+                .next(new EventCategoryBaseHandler());
+       baseHandler.handle(event, body);
+        System.out.println(event.getEventName());
+        /* if(body.getEventName() != null){
             event.setEventName(body.getEventName());
         }
         if(body.getEventDescription() != null){
@@ -189,7 +205,7 @@ public class EventService {
         }
         if (body.getEventPhoto() != null) {
             event.setEventPhoto(body.getEventPhoto());
-        }
+        }*/
         if(!event.equals(eventS)){
             eventRepository.save(event);
         }
