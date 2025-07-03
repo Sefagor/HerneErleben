@@ -42,7 +42,6 @@ public class BookingService {
         Response response = new Response();
 
         try {
-            System.out.println("Service" +userId);
             Event event = eventRepository.findById(eventID).orElseThrow(() -> new CustomException("Event Not Found"));
             User user = userRepository.findById(userId).orElseThrow(() -> new CustomException("User Not Found"));
 
