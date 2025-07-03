@@ -1,9 +1,0 @@
-de\stadt\herne\eventApp\entity\EventBody.class
-de\stadt\herne\eventApp\mqtt\MqttPublisher.class
-de\stadt\herne\eventApp\entity\CategoryDTO.class
-de\stadt\herne\eventApp\controller\PublishController.class
-de\stadt\herne\eventApp\entity\Status.class
-de\stadt\herne\eventApp\entity\Location.class
-de\stadt\herne\eventApp\service\MqttService.class
-de\stadt\herne\eventApp\SimulatorCityHerneApplication.class
-de\stadt\herne\eventApp\controller\MqttController.class

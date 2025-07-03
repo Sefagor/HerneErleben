@@ -3,6 +3,7 @@ package de.fh.dortmund.eventApp.security;
 
 import de.fh.dortmund.eventApp.service.CustomUserDetailsService;
 import de.fh.dortmund.eventApp.utils.JWTUtils;
+import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,6 +34,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
         final String jwtToken;
         final String userEmail;
+        String userEmail1;
 
         if (authHeader == null || authHeader.isBlank()) {
             filterChain.doFilter(request, response);
@@ -40,8 +42,13 @@ public class JWTAuthFilter extends OncePerRequestFilter {
         }
 
         jwtToken = authHeader.substring(7);
-        userEmail = jwtUtils.extractUsername(jwtToken);
+        try{
+            userEmail1 = jwtUtils.extractUsername(jwtToken);
+        } catch (MalformedJwtException e){
+            userEmail1 = null;
+        }
 
+        userEmail = userEmail1;
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(userEmail);
             if (jwtUtils.isValidToken(jwtToken, userDetails)) {

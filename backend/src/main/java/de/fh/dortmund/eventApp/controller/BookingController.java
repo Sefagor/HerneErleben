@@ -37,7 +37,6 @@ public class BookingController {
     public ResponseEntity<Response> saveBookings(@PathVariable Long eventID,
                                                  @PathVariable Long userId) {
 
-        System.out.println("Controller" + userId);
         Response response = bookingEmailFacade.makeBooking(userId, eventID);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
