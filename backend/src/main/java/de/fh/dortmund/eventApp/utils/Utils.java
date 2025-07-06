@@ -59,11 +59,13 @@ public class Utils {
     }
 
     public static LocationDTO mapLocationEntityToLocationDTO(Location location) {
-        return LocationDTO.builder()
-                .city(location.getCity())
-                .houseNumber(location.getHouseNumber())
-                .zip(location.getZip())
-                .street(location.getStreet()).build();
+        LocationDTO locationDTO = new LocationDTO();
+        locationDTO.setCity(location.getCity());
+        locationDTO.setHouseNumber(location.getHouseNumber());
+        locationDTO.setZip(location.getZip());
+        locationDTO.setStreet(location.getStreet());
+        return locationDTO;
+
     }
 
     public static BookingDTO mapBookingEntityToBookingDTO(Booking booking) {
