@@ -39,7 +39,10 @@ public class BookingService {
 
     public Response bookAnEvent(Long eventID, Long userId) {
 
-        Response response = new Response();
+        int statusCode = 200;
+        String message = "Successfully booked an event";
+        String metadata = null;
+        String bookingConfirmationCode = null;
 
         try {
             Event event = eventRepository.findById(eventID).orElseThrow(() -> new CustomException("Event Not Found"));
@@ -59,72 +62,79 @@ public class BookingService {
             bookingRequest.setEvent(event);
             bookingRequest.setUser(user);
             bookingRequest.setStatus(Status.ACTIVE);
-            String bookingConfirmationCode = Utils.generateRandomConfirmationCode(10);
+            bookingConfirmationCode = Utils.generateRandomConfirmationCode(10);
             bookingRequest.setBookingConfirmationCode(bookingConfirmationCode);
             bookingRepository.save(bookingRequest);
-            response.setMetadata(user.getEmail());
-            response.setStatusCode(200);
-            response.setMessage("successful");
-            response.setBookingConfirmationCode(bookingConfirmationCode);
+            metadata = user.getEmail();
 
         } catch (CustomException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+            statusCode = 404;
+            message = e.getMessage();
 
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error Saving a booking: " + e.getMessage());
+            statusCode = 500;
+            message = "Error Saving a booking: " + e.getMessage();
 
         }
-        return response;
+
+        return Response.builder()
+                .statusCode(statusCode)
+                .message(message)
+                .metadata(metadata)
+                .bookingConfirmationCode(bookingConfirmationCode)
+                .build();
     }
 
 
     @Transactional(readOnly = true)
     public Response findBookingByConfirmationCode(String confirmationCode) {
 
-        Response response = new Response();
-
+        String message = "Successful";
+        int statusCode = 200;
+        BookingDTO bookingDTO = null;
         try {
             Booking booking = bookingRepository.findByBookingConfirmationCode(confirmationCode).orElseThrow(() -> new CustomException("Booking Not Found"));
-            BookingDTO bookingDTO = Utils.mapBookingEntityToBookingDTOPlusBookedEvents(booking, true);
-            response.setStatusCode(200);
-            response.setMessage("successful");
-            response.setBooking(bookingDTO);
+            bookingDTO = Utils.mapBookingEntityToBookingDTOPlusBookedEvents(booking, true);
 
         } catch (CustomException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+            statusCode = 404;
+            message = e.getMessage();
 
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error Finding a booking: " + e.getMessage());
+            statusCode = 500;
+            message = "Error Finding the booking: " + e.getMessage();
 
         }
-        return response;
+        return Response.builder()
+                .message(message)
+                .statusCode(statusCode)
+                .booking(bookingDTO)
+                .build();
     }
 
     public Response getAllBookings() {
 
-        Response response = new Response();
+        String message = "Successful";
+        int statusCode = 200;
+        List<BookingDTO> bookingDTOList = null;
 
         try {
             List<Booking> bookingList = bookingRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
-            List<BookingDTO> bookingDTOList = Utils.mapBookingListEntityToBookingListDTO(bookingList);
-            response.setStatusCode(200);
-            response.setMessage("successful");
-            response.setBookingList(bookingDTOList);
+            bookingDTOList = Utils.mapBookingListEntityToBookingListDTO(bookingList);
 
         } catch (CustomException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+            statusCode = 404;
+            message = e.getMessage();
 
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error Getting all bookings: " + e.getMessage());
-
+            statusCode = 500;
+            message = "Error Getting all bookings: " + e.getMessage();
         }
-        return response;
+        return Response.builder()
+                .message(message)
+                .statusCode(statusCode)
+                .bookingList(bookingDTOList)
+                .build();
     }
 
     public Booking findBookingByID(Long bookingID) {
@@ -133,24 +143,25 @@ public class BookingService {
 
     public Response cancelBooking(Long bookingId) {
 
-        Response response = new Response();
+        String message = "Successful";
+        int statusCode = 200;
 
         try {
             Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> new CustomException("Booking Does Not Exist"));
             booking.setStatus(Status.CANCELLED);
             bookingRepository.save(booking);
-            response.setStatusCode(200);
-            response.setMessage("successful");
         } catch (CustomException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+            statusCode = 404;
+            message = e.getMessage();
 
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error Cancelling a booking: " + e.getMessage());
-
+            statusCode = 500;
+            message = "Error Cancelling a booking: "+ e.getMessage();
         }
-        return response;
+        return Response.builder()
+                .message(message)
+                .statusCode(statusCode)
+                .build();
     }
 
 }
