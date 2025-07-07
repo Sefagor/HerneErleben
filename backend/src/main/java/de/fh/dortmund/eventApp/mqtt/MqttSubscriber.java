@@ -1,8 +1,8 @@
 package de.fh.dortmund.eventApp.mqtt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.fh.dortmund.eventApp.mqtt.observer.MqttMessageObserver;
 import de.fh.dortmund.eventApp.mqtt.subject.MqttSubject;
-import de.fh.dortmund.eventApp.requestBody.EventBody;
 import de.fh.dortmund.eventApp.service.EventService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +22,10 @@ public class MqttSubscriber {
 
     @PostConstruct
     public void subscribe() {
-        subject.addObserver((topic, payload) -> {
-            if (topic.equals("infos/servertest")) {
-                try {
-                    EventBody eventBody = mapper.readValue(payload, EventBody.class);
-                    eventService.updateOrCreateEventFromHerne(eventBody);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        MqttMessageObserver observer = new MqttMessageObserver();
+        observer.setEventService(eventService);
+        observer.setMapper(mapper);
+        subject.addObserver(observer);
         subject.connect();
     }
 }
