@@ -1,6 +1,6 @@
 package de.fh.dortmund.eventApp.mqtt.subject;
 
-import de.fh.dortmund.eventApp.mqtt.observer.MqttMessageObserver;
+import de.fh.dortmund.eventApp.mqtt.observer.Observer;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,30 +18,19 @@ import java.util.List;
 public class MqttSubject implements Subject {
     private MqttClient client;
 
-    MqttObserverDispatcher dispatcher = new MqttObserverDispatcher();
+    private MqttObserverDispatcher dispatcher = new MqttObserverDispatcher();
     private final String broker = "tcp://mosquitto:1883";
     private final String topic = "infos/servertest";
     private final String clientID = "subscriber";
-
+    private final List<Observer> observers = new ArrayList<>();
     public MqttSubject() {
         configClient();
     }
 
     private class MqttObserverDispatcher implements MqttCallback {
 
-
-        private final List<MqttMessageObserver> observers = new ArrayList<>();
-
         public MqttObserverDispatcher() {
 
-        }
-
-        public void addObserver(MqttMessageObserver observer) {
-            observers.add(observer);
-        }
-
-        public void removeObserver(MqttMessageObserver observer) {
-            observers.remove(observer);
         }
 
         @Override
@@ -52,9 +41,7 @@ public class MqttSubject implements Subject {
 
         @Override
         public void messageArrived(String topic, MqttMessage msg) throws Exception {
-            notifyObservers(msg, observers);
-
-
+            notifyObservers(msg);
         }
 
         @Override
@@ -85,20 +72,20 @@ public class MqttSubject implements Subject {
     }
 
     @Override
-    public void notifyObservers(MqttMessage message, List<MqttMessageObserver> observers) {
-        for (MqttMessageObserver obs : observers) {
+    public void notifyObservers(MqttMessage message) {
+        for (Observer obs : observers) {
             obs.onMessage(topic, new String(message.getPayload()));
         }
     }
 
     @Override
-    public void addObserver(MqttMessageObserver observer) {
-        dispatcher.addObserver(observer);
+    public void addObserver(Observer observer) {
+        observers.add(observer);
     }
 
     @Override
-    public void removeObserver(MqttMessageObserver observer) {
-        dispatcher.removeObserver(observer);
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
     }
 
 }

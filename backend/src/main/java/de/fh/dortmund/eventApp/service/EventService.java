@@ -28,6 +28,7 @@ public class EventService {
     private final EventRepository eventRepository;
     private final BookingRepository bookingRepository;
     private final CategoryRepository categoryRepository;
+
     public EventService(EventRepository eventRepository, BookingRepository bookingRepository, CategoryRepository categoryRepository) {
         this.eventRepository = eventRepository;
         this.bookingRepository = bookingRepository;
@@ -36,27 +37,30 @@ public class EventService {
 
 
     public Response addNewEvent(EventBody eventBody, MultipartFile photo) {
-        Response response = new Response();
+        int statusCode = 200;
+        String message = "Successful";
+        EventDTO eventDTO = null;
 
         try {
             eventBody.setEventPhoto(Base64.getEncoder().encodeToString(photo.getBytes()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
             Event savedEvent = convertAndSaveEventBodyToEvent(eventBody);
-            EventDTO eventDTO = Utils.mapEventEntityToEventDTO(savedEvent);
-            response.setStatusCode(200);
-            response.setMessage("successful");
-            response.setEvent(eventDTO);
+            eventDTO = Utils.mapEventEntityToEventDTO(savedEvent);
 
+
+        } catch (IOException e) {
+            statusCode = 400;
+            message = "Failed to process event photo:" + e.getMessage();
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error saving an event " + e.getMessage());
+            statusCode = 500;
+            message = "Error saving an event " + e.getMessage();
         }
-        return response;
+        return Response.builder()
+                .statusCode(statusCode)
+                .message(message)
+                .event(eventDTO)
+                .build();
     }
+
 
     public Event convertAndSaveEventBodyToEvent(EventBody eventBody) {
         Event event = new Event();
@@ -75,45 +79,50 @@ public class EventService {
     }
 
     public Response getAllEvents() {
-        Response response = new Response();
+        int statusCode = 200;
+        String message = "Successful";
+        List<EventDTO> eventDTOList = null;
 
         try {
             List<Event> eventList = eventRepository.findAll()
                     .stream()
                     .sorted((e1, e2) -> Math.toIntExact(e1.getId() - e2.getId())).toList();
-            List<EventDTO> eventDTOList = Utils.mapEventListEntityToEventListDTO(eventList);
-            response.setStatusCode(200);
-            response.setMessage("successful");
-            response.setEventList(eventDTOList);
-
+            eventDTOList = Utils.mapEventListEntityToEventListDTO(eventList);
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error saving an event " + e.getMessage());
+            statusCode = 500;
+            message = "Error retrieving events: " + e.getMessage();
         }
-        return response;
+        return Response.builder()
+                .statusCode(statusCode)
+                .message(message)
+                .eventList(eventDTOList)
+                .build();
     }
 
     public Response deleteEvent(Long eventId) {
-        Response response = new Response();
+        int statusCode = 200;
+        String message = "Successful";
 
         try {
             eventRepository.findById(eventId).orElseThrow(() -> new CustomException("Event Not Found"));
             eventRepository.deleteById(eventId);
-            response.setStatusCode(200);
-            response.setMessage("successful");
-
         } catch (CustomException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+            statusCode = 404;
+            message = e.getMessage();
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error saving event " + e.getMessage());
+            statusCode = 500;
+            message = "Error deleting event: " + e.getMessage();
         }
-        return response;
+        return Response.builder()
+                .statusCode(statusCode)
+                .message(message)
+                .build();
     }
 
     public Response updateEvent(Long eventID, MultipartFile photo, Event body) {
-        Response response = new Response();
+        int statusCode = 200;
+        String message = "Successful";
+        EventDTO eventDTO = null;
 
         try {
             Event event = eventRepository.findById(eventID).orElseThrow(() -> new CustomException("Event Not Found"));
@@ -132,20 +141,21 @@ public class EventService {
 
 
             Event updatedEvent = eventRepository.save(event);
-            EventDTO eventDTO = Utils.mapEventEntityToEventDTO(updatedEvent);
+            eventDTO = Utils.mapEventEntityToEventDTO(updatedEvent);
 
-            response.setStatusCode(200);
-            response.setMessage("successful");
-            response.setEvent(eventDTO);
 
         } catch (CustomException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+            statusCode = 404;
+            message = e.getMessage();
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error saving an event " + e.getMessage());
+            statusCode = 500;
+            message = "Error updating event: " + e.getMessage();
         }
-        return response;
+        return Response.builder()
+                .statusCode(statusCode)
+                .message(message)
+                .event(eventDTO)
+                .build();
     }
 
     @Transactional
@@ -161,7 +171,7 @@ public class EventService {
         System.out.println(event.getEventName());
         System.out.println("After");
         BaseHandler baseHandler = new EventNameBaseHandler();
-       baseHandler
+        baseHandler
                 .next(new EventDescriptionBaseHandler())
                 .next(new EventLocationBaseHandler())
                 .next(new EventMaxParticipantBaseHandler())
@@ -170,7 +180,7 @@ public class EventService {
                 .next(new EventStatusBaseHandler())
                 .next(new EventPhotoBaseHandler())
                 .next(new EventCategoryBaseHandler());
-       baseHandler.handle(event, body);
+        baseHandler.handle(event, body);
         System.out.println(event.getEventName());
         /* if(body.getEventName() != null){
             event.setEventName(body.getEventName());
@@ -206,29 +216,32 @@ public class EventService {
         if (body.getEventPhoto() != null) {
             event.setEventPhoto(body.getEventPhoto());
         }*/
-        if(!event.equals(eventS)){
+        if (!event.equals(eventS)) {
             eventRepository.save(event);
         }
     }
 
     public Response getEventById(Long eventID) {
-        Response response = new Response();
+        int statusCode = 200;
+        String message = "Successful";
+        EventDTO eventDTO = null;
 
         try {
             Event event = eventRepository.findById(eventID).orElseThrow(() -> new CustomException("Event Not Found"));
-            EventDTO eventDTO = Utils.mapEventEntityToEventDTOPlusBookings(event);
-            response.setStatusCode(200);
-            response.setMessage("successful");
-            response.setEvent(eventDTO);
+            eventDTO = Utils.mapEventEntityToEventDTOPlusBookings(event);
 
         } catch (CustomException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+            statusCode = 404;
+            message = e.getMessage();
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error saving a event " + e.getMessage());
+            statusCode = 500;
+            message = "Error retrieving event: " + e.getMessage();
         }
-        return response;
+        return Response.builder()
+                .statusCode(statusCode)
+                .message(message)
+                .event(eventDTO)
+                .build();
     }
 
     public Event findEventById(Long eventID) {
@@ -237,23 +250,26 @@ public class EventService {
 
 
     public Response getAllAvailableEvents() {
-        Response response = new Response();
+        int statusCode = 200;
+        String message = "Successful";
+        List<EventDTO> eventDTOList = null;
 
         try {
             List<Event> eventList = findAllAvailableEvents();
-            List<EventDTO> eventDTOList = Utils.mapEventListEntityToEventListDTO(eventList);
-            response.setStatusCode(200);
-            response.setMessage("successful");
-            response.setEventList(eventDTOList);
+            eventDTOList = Utils.mapEventListEntityToEventListDTO(eventList);
 
         } catch (CustomException e) {
-            response.setStatusCode(404);
-            response.setMessage(e.getMessage());
+            statusCode = 404;
+            message = e.getMessage();
         } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Error loading an Event " + e.getMessage());
+            statusCode = 500;
+            message = "Error loading events: " + e.getMessage();
         }
-        return response;
+        return Response.builder()
+                .statusCode(statusCode)
+                .message(message)
+                .eventList(eventDTOList)
+                .build();
     }
 
     private List<Event> findAllAvailableEvents() {

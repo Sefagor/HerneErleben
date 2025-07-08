@@ -3,7 +3,6 @@ package de.fh.dortmund.eventApp.controller;
 
 import de.fh.dortmund.eventApp.dto.CategoryDTO;
 import de.fh.dortmund.eventApp.dto.Response;
-import de.fh.dortmund.eventApp.entity.Category;
 import de.fh.dortmund.eventApp.entity.Event;
 import de.fh.dortmund.eventApp.requestBody.EmailContent;
 import de.fh.dortmund.eventApp.requestBody.EventBody;

@@ -19,17 +19,16 @@ docker compose up --build
 ### Spring Boot App
 
 * The Spring Boot application runs by default on *http://localhost:8090*
-* to test it
-    * open Postmann
-    * send a GET request to *http://localhost:8090/events/all*
+* You can test it with Swagger
 
 ### Herne Backend
 
 * The herner Backend runs by default on *http://localhost:8091*
-* to test it
-    * open Postmann
-    * send a POST request to *http://localhost:8091/send*
-    * don't forget to pass the required arguments :)
+* You can test it with Swagger
+
+### Frontend
+
+* The Frontend runs by default on *http://localhost:3000*
 
 ### Database
 
