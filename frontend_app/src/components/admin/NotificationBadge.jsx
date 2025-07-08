@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import ApiService from '../../service/ApiService';
-import { format } from 'date-fns';
+import {format} from 'date-fns';
 import '../../service/NotificationBadge.css';
 
 function NotificationBadge() {
