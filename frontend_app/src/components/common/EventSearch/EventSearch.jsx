@@ -1,10 +1,10 @@
 // frontend_app/src/common/EventSearch.jsx
-import React, { useEffect, useState, useRef } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ApiService from '../../../service/ApiService';
 import styles from './EventSearch.module.css';
-import { FaCalendarAlt, FaMapMarkerAlt, FaTags } from 'react-icons/fa';
+import {FaCalendarAlt, FaMapMarkerAlt, FaTags} from 'react-icons/fa';
 
 const EventSearch = ({ handleSearchResult, inline = false }) => {
     const [location, setLocation] = useState('');

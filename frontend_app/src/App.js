@@ -1,6 +1,6 @@
 // src/App.js
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
 import Navbar from './components/common/Navbar';
 import FooterComponent from './components/common/Footer/Footer';
 import LoginPage from './components/auth/LoginPage';
@@ -12,7 +12,7 @@ import ManageBookingsPage from './components/admin/ManageBookingsPage';
 import EditBookingPage from './components/admin/EditBookingPage';
 import ProfilePage from './components/profile/ProfilePage';
 import EditProfilePage from './components/profile/EditProfilePage';
-import { ProtectedRoute, AdminRoute } from './service/guard';
+import {AdminRoute, ProtectedRoute} from './service/guard';
 import '@fontsource/delius';
 import AllEventsPage from "./components/booking-events/AllEvents/AllEvents";
 import EventDetailsPage from "./components/booking-events/EventDetails/EventDetailsPage";

@@ -1,7 +1,6 @@
-
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import ApiService from '../../service/ApiService';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 function EditProfilePage() {
     const navigate = useNavigate();

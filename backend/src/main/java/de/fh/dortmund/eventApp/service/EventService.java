@@ -88,6 +88,7 @@ public class EventService {
                     .stream()
                     .sorted((e1, e2) -> Math.toIntExact(e1.getId() - e2.getId())).toList();
             eventDTOList = Utils.mapEventListEntityToEventListDTO(eventList);
+
         } catch (Exception e) {
             statusCode = 500;
             message = "Error retrieving events: " + e.getMessage();

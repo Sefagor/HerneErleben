@@ -29,4 +29,3 @@ public class MqttSubscriber {
         subject.connect();
     }
 }
-

@@ -30,7 +30,7 @@ const AllEventsPage = () => {
             })
             .catch(console.error);
     }, []);
-
+    console.log(events)
     const lastIdx = currentPage * eventsPerPage;
     const firstIdx = lastIdx - eventsPerPage;
     const currentEvents = filteredEvents.slice(firstIdx, lastIdx);

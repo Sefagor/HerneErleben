@@ -15,6 +15,7 @@ public class MqttMessageObserver implements Observer {
             try {
                 EventBody eventBody = mapper.readValue(payload, EventBody.class);
                 eventService.updateOrCreateEventFromHerne(eventBody);
+                System.out.println("Ich war hier rien");
             } catch (Exception e) {
                 e.printStackTrace();
             }

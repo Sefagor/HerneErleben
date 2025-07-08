@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import ApiService from '../../service/ApiService';
-import { format } from 'date-fns'; // schöneres Date-Format
+import {format} from 'date-fns'; // schöneres Date-Format
 import AdminLayout from '../admin/AdminLayout';
 
 
