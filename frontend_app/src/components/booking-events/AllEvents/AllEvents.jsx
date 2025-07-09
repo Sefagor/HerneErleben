@@ -25,12 +25,13 @@ const AllEventsPage = () => {
         ApiService.getAllEvents()
             .then(data => {
                 const list = Array.isArray(data) ? data : (data.eventList || []);
+                console.log('🔍 Fetched events:', list);
                 setEvents(list);
                 setFilteredEvents(list);
             })
             .catch(console.error);
     }, []);
-    console.log(events)
+
     const lastIdx = currentPage * eventsPerPage;
     const firstIdx = lastIdx - eventsPerPage;
     const currentEvents = filteredEvents.slice(firstIdx, lastIdx);
