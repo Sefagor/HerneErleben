@@ -1,10 +1,8 @@
-// frontend_app/src/components/Banner.jsx
 import React from "react";
 import styles from "./Banner.module.css";
 import rathaus from "../../../assets/images/rathaus_herne.jpg";
-import RoomSearch from "../../common/EventSearch/EventSearch";
 
-const Banner = ({onSearch}) => (
+const Banner = () => (
     <section className={styles.banner}>
         <div className={styles.left}>
             <div className={styles.welcome_part}>
@@ -23,9 +21,6 @@ const Banner = ({onSearch}) => (
         <div className={styles.right}>
             <img src={rathaus} alt="Rathaus Herne" className={styles.image}/>
         </div>
-
-        {/* Ortayı kesen, yüzen arama bileşeni */}
-        <RoomSearch handleSearchResult={onSearch}/>
     </section>
 );
 

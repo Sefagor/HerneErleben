@@ -1,0 +1,74 @@
+/* ProfilePage.module.css */
+
+.profilePage {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.welcome {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.profileActions {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.editProfileButton {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 0.4rem;
+    background-color: #2cc387;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.editProfileButton:hover {
+    background-color: #28a174;
+}
+
+.errorMessage {
+    color: #d9534f;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.profileDetails {
+    background: #f9f9f9;
+    border-radius: 0.4rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.profileDetails h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.profileDetails p {
+    margin: 0.5rem 0;
+    line-height: 1.5;
+}
+
+.bookingsSection {
+    background: #fff;
+    border-radius: 0.4rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.bookingsSection h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
