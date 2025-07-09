@@ -93,7 +93,11 @@ public class Utils {
         eventDTO.setCategories(event.getCategory().stream().map(Utils::mapCategoryToCategoryDTO).toList());
         eventDTO.setEventDescription(event.getEventDescription());
         if (event.getBookings() != null) {
-            eventDTO.setBookings(event.getBookings().stream().map(Utils::mapBookingEntityToBookingDTO).collect(Collectors.toList()));
+            eventDTO.setBookings(event.getBookings().stream().map(Utils::mapBookingEntityToBookingDTO).collect(Collectors.toList()));eventDTO.setBookings(
+                    event.getBookings().stream()
+                            .map(booking -> mapBookingEntityToBookingDTOPlusBookedEvents(booking, true))
+                            .collect(Collectors.toList())
+            );
         }
         return eventDTO;
     }
