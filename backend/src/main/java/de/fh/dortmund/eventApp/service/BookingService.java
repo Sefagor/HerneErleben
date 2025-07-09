@@ -44,6 +44,8 @@ public class BookingService {
         String metadata = null;
         String bookingConfirmationCode = null;
 
+        System.out.println("userid:"+userId+"\neventid:"+eventID);
+
         try {
             Event event = eventRepository.findById(eventID).orElseThrow(() -> new CustomException("Event Not Found"));
             User user = userRepository.findById(userId).orElseThrow(() -> new CustomException("User Not Found"));
