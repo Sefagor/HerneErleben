@@ -127,3 +127,19 @@
 .calendarIcon {
     margin-right: 0.25rem;
 }
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.categoryTag {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    color: #333;
+}
+

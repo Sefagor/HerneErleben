@@ -22,9 +22,22 @@ const EventDetailsPage = () => {
                 setLoading(true);
                 const res = await ApiService.getEventById(eventId);
                 const evt = res.event || res;
+                console.log('Loaded event:', evt);
                 setEvent(evt);
+
                 const profile = await ApiService.getUserProfile();
+                console.log('Current user profile:', profile);
                 setUserId(profile.user.id);
+
+                // Rezervasyon kontrolü: kullanıcı daha önce rezervasyon yaptı mı?
+                if (evt.bookings && evt.bookings.some(b => b.user?.id === profile.user.id)) {
+                    console.log('User has already booked this event');
+                    const userBooking = evt.bookings.find(b => b.user?.id === profile.user.id);
+                    setConfirmationCode(userBooking?.bookingConfirmationCode || '');
+                    setIsBooked(true);
+                } else {
+                    console.log('User has not booked yet');
+                }
             } catch (e) {
                 setError(e.response?.data?.message || e.message);
             } finally {
@@ -42,7 +55,7 @@ const EventDetailsPage = () => {
             const now = Date.now();
             const diff = target - now;
             if (diff <= 0) {
-                setTimeLeft('Veranstalltung ist gestartet!');
+                setTimeLeft('Veranstaltung ist gestartet!');
                 return clearInterval(timer);
             }
             const days = Math.floor(diff / 86400000);
@@ -58,6 +71,7 @@ const EventDetailsPage = () => {
     const handleBooking = async () => {
         try {
             const res = await ApiService.bookEvent(eventId, userId, {});
+            console.log('Booking response:', res);
             setConfirmationCode(res.bookingConfirmationCode);
             setIsBooked(true);
         } catch (e) {
@@ -74,7 +88,8 @@ const EventDetailsPage = () => {
         eventDate,
         eventDescription,
         eventPhotoUrl,
-        eventLocation = {}
+        eventLocation = {},
+        categories = []
     } = event;
     const {city, street, houseNumber, zip} = eventLocation;
     const address = street && zip && city
@@ -83,6 +98,8 @@ const EventDetailsPage = () => {
     const formattedDate = new Date(eventDate).toLocaleDateString('de-DE', {
         day: '2-digit', month: '2-digit', year: 'numeric'
     });
+
+    console.log('isBooked state:', isBooked, 'confirmationCode:', confirmationCode);
 
     return (
         <div className={styles.outerContainer}>
@@ -105,6 +122,18 @@ const EventDetailsPage = () => {
                             <FaMapMarkerAlt/> {address}
                         </p>
                         <p className={styles.countdown}>{timeLeft}</p>
+                        {/* Kategorien anzeigen */}
+                        {categories.length > 0 && (
+                            <div className={styles.categories}>
+                                {categories.map(cat => (
+                                    <span key={cat.name} className={styles.categoryTag}>
+                                        {cat.name}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
+
+
                     </div>
                 </div>
 
@@ -128,15 +157,12 @@ const EventDetailsPage = () => {
                     </div>
                 </div>
 
-
                 {/* Sticky Book Button */}
                 {!isBooked && (
                     <div className={styles.stickyFooter}>
-                        {!isBooked && (
-                            <button className={styles.bookBtn} onClick={handleBooking}>
-                                Jetzt buchen
-                            </button>
-                        )}
+                        <button className={styles.bookBtn} onClick={handleBooking}>
+                            Jetzt buchen
+                        </button>
                     </div>
                 )}
 

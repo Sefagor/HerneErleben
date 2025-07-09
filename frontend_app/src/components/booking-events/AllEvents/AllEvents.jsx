@@ -1,4 +1,3 @@
-// frontend_app/src/pages/AllEventsPage.jsx
 import React, {useEffect, useState} from 'react';
 import ApiService from '../../../service/ApiService';
 import Pagination from '../../common/Pagination';
@@ -7,36 +6,35 @@ import EventSearch from '../../common/EventSearch/EventSearch';
 import styles from './AllEvents.module.css';
 
 const AllEventsPage = () => {
-    const [events, setEvents] = useState([]);
+    // Ursprüngliche Liste aller Events
+    const [allEvents, setAllEvents] = useState([]);
+    // Gefilterte Events
     const [filteredEvents, setFilteredEvents] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const eventsPerPage = 10;
 
-    const handleSearchResult = (results) => {
-        setEvents(results);
-        setFilteredEvents(results);
-        setSelectedCategory('');
-        setCurrentPage(1);
-    };
-
+    // Backend beim ersten Laden alle Events abrufen
     useEffect(() => {
         ApiService.getAllEvents()
             .then(data => {
                 const list = Array.isArray(data) ? data : (data.eventList || []);
-                setEvents(list);
+                setAllEvents(list);
                 setFilteredEvents(list);
             })
             .catch(console.error);
     }, []);
-    console.log(events)
+
+    // Funktion zur Aktualisierung der Suchergebnisse
+    const handleSearchResult = (results) => {
+        // Beim neuen Filter immer von der vollständigen Liste starten
+        setFilteredEvents(results);
+        setCurrentPage(1);
+    };
+
+    // Pagination-Berechnungen
     const lastIdx = currentPage * eventsPerPage;
     const firstIdx = lastIdx - eventsPerPage;
     const currentEvents = filteredEvents.slice(firstIdx, lastIdx);
-
-    // debug
-    console.log('total events:', filteredEvents.length);
 
     return (
         <div className={styles.allEventsPage}>
@@ -45,7 +43,12 @@ const AllEventsPage = () => {
             </div>
 
             <div className={styles.controls}>
-                <EventSearch inline handleSearchResult={handleSearchResult}/>
+                {/* Für Inline-Suche immer alle Events übergeben */}
+                <EventSearch
+                    inline
+                    events={allEvents}
+                    handleSearchResult={handleSearchResult}
+                />
             </div>
 
             <div className={styles.eventGrid}>

@@ -38,27 +38,37 @@ public class BookingService {
 
 
     public Response bookAnEvent(Long eventID, Long userId) {
-
         int statusCode = 200;
-        String message = "Successfully booked an event";
+        String message = "Buchung erfolgreich";
         String metadata = null;
         String bookingConfirmationCode = null;
 
+        System.out.println("userid:" + userId + "\neventid:" + eventID);
+
         try {
-            Event event = eventRepository.findById(eventID).orElseThrow(() -> new CustomException("Event Not Found"));
-            User user = userRepository.findById(userId).orElseThrow(() -> new CustomException("User Not Found"));
+            // 1) Existiert das Event und der User?
+            Event event = eventRepository.findById(eventID)
+                    .orElseThrow(() -> new CustomException("Event nicht gefunden"));
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new CustomException("Benutzer nicht gefunden"));
 
+            // 2) Buchungen für vergangene Events verhindern
             if (event.getEventDate().isBefore(LocalDate.now())) {
-                throw new IllegalArgumentException("Booking isn't possible");
+                throw new CustomException("Buchung für vergangene Veranstaltungen nicht möglich");
             }
 
-
+            // 3) Prüfen, ob noch Plätze frei sind
             if (!eventService.isEventAvailable(event)) {
-                throw new CustomException("Not more place Available for selected date range");
+                throw new CustomException("Keine freien Plätze mehr für diese Veranstaltung");
             }
 
-            Booking bookingRequest = new Booking();
+            // 4) Doppelte Buchungen unterbinden
+            if (bookingRepository.existsByEventAndUser(event, user)) {
+                throw new CustomException("Sie haben diese Veranstaltung bereits gebucht");
+            }
 
+            // 5) Neue Buchung anlegen und speichern
+            Booking bookingRequest = new Booking();
             bookingRequest.setEvent(event);
             bookingRequest.setUser(user);
             bookingRequest.setStatus(Status.ACTIVE);
@@ -68,13 +78,13 @@ public class BookingService {
             metadata = user.getEmail();
 
         } catch (CustomException e) {
-            statusCode = 404;
+            // Benutzerfehler (z.B. schon gebucht, kein Platz)
+            statusCode = 400;
             message = e.getMessage();
-
         } catch (Exception e) {
+            // Serverfehler
             statusCode = 500;
-            message = "Error Saving a booking: " + e.getMessage();
-
+            message = "Fehler beim Speichern der Buchung: " + e.getMessage();
         }
 
         return Response.builder()

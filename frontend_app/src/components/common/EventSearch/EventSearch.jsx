@@ -1,164 +1,166 @@
-// frontend_app/src/common/EventSearch.jsx
-import React, {useEffect, useRef, useState} from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import React, { useState, useEffect, useRef } from 'react';
 import ApiService from '../../../service/ApiService';
 import styles from './EventSearch.module.css';
-import {FaCalendarAlt, FaMapMarkerAlt, FaTags} from 'react-icons/fa';
 
-const EventSearch = ({ handleSearchResult, inline = false }) => {
+const EventSearch = ({ handleSearchResult, inline = false, events = [] }) => {
+    // Zustände für Filter
     const [location, setLocation] = useState('');
+    const [categorySearch, setCategorySearch] = useState('');
     const [category, setCategory] = useState('');
-    const [dateType, setDateType] = useState('today');
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
-    const [categories, setCategories] = useState([]);
-    const [error, setError] = useState('');
-    const errorTimeoutRef = useRef();
+    const [fromDate, setFromDate] = useState('');
+    const [toDate, setToDate] = useState('');
 
+    // Daten für Kategorie-Dropdown
+    const [allCategories, setAllCategories] = useState([]);
+    const [filteredCategories, setFilteredCategories] = useState([]);
+    const [showCat, setShowCat] = useState(false);
+    const catRef = useRef(null);
+
+    // Kategorien vom Backend holen und deduplizieren
     useEffect(() => {
         ApiService.getEventCategories()
-            .then(list => setCategories(list))
-            .catch(err => console.error(err));
+            .then(cats => {
+                const names = cats.map(c => c.name);
+                const uniq = Array.from(new Set(names));
+                setAllCategories(uniq);
+                setFilteredCategories(uniq);
+            })
+            .catch(console.error);
     }, []);
 
+    // Dropdown schließen, wenn außerhalb geklickt wird
     useEffect(() => {
-        // cleanup on unmount
-        return () => clearTimeout(errorTimeoutRef.current);
+        const handler = e => {
+            if (catRef.current && !catRef.current.contains(e.target)) {
+                setShowCat(false);
+            }
+        };
+        document.addEventListener('mousedown', handler);
+        return () => document.removeEventListener('mousedown', handler);
     }, []);
 
-    const showError = (msg, timeout = 5000) => {
-        clearTimeout(errorTimeoutRef.current);
-        setError(msg);
-        errorTimeoutRef.current = setTimeout(() => setError(''), timeout);
+    // Kategorieeingabe ändern
+    const handleCategoryInput = e => {
+        const val = e.target.value;
+        setCategorySearch(val);
+        setCategory(val);
+        setFilteredCategories(
+            allCategories.filter(name =>
+                name.toLowerCase().includes(val.toLowerCase())
+            )
+        );
+        setShowCat(true);
     };
 
-    const onSearch = async () => {
-        if (!location || !category) {
-            return showError('Bitte wählen Sie Ort und Kategorie.');
+    const selectCategory = name => {
+        setCategory(name);
+        setCategorySearch(name);
+        setShowCat(false);
+    };
+
+    // Es müssen alle Filter ausgefüllt sein
+    const isSearchEnabled = location && category && fromDate && toDate;
+
+    const onSearch = async e => {
+        e.preventDefault();
+
+        // Neue Debug-Logeinträge
+        console.log('Inline flag:', inline);
+        console.log('Events list:', events);
+        console.log('Filters:', { location, category, fromDate, toDate });
+
+        if (!isSearchEnabled) {
+            console.log('Search not enabled - missing filters');
+            return;
         }
 
-        let from, to;
-        const today = new Date();
-        switch (dateType) {
-            case 'today':
-                from = to = today.toISOString().slice(0, 10);
-                break;
-            case 'weekend': {
-                // gelecek cumartesi ve pazar
-                const sat = new Date(today);
-                const day = sat.getDay();
-                sat.setDate(sat.getDate() + ((6 - day + 7) % 7));
-                const sun = new Date(sat);
-                sun.setDate(sat.getDate() + 1);
-                from = sat.toISOString().slice(0, 10);
-                to = sun.toISOString().slice(0, 10);
-                break;
-            }
-            case 'custom':
-                if (!startDate || !endDate) {
-                    return showError('Bitte wählen Sie das Zeitraum.');
-                }
-                from = startDate.toISOString().slice(0, 10);
-                to = endDate.toISOString().slice(0, 10);
-                break;
-            default:
-                return;
-        }
+        if (inline) {
+            console.log('--- Debugging Filter Details ---');
+            const filtered = events.filter(ev => {
+                const evDate = new Date(ev.eventDate);
+                const from = new Date(fromDate);
+                const to = new Date(toDate);
 
-        try {
-            const params = { location, category, from, to };
-            const { statusCode, eventList } = await ApiService.getEventsByParams(params);
-            if (statusCode !== 200) {
-                return showError('Fehler beim Abrufen der Veranstaltungen.');
+                const okDate = evDate >= from && evDate <= to;
+                const city = ev.eventLocation?.city || '';
+                const okLoc = city.toLowerCase().includes(location.toLowerCase());
+                const okCat = ev.categories?.some(c => c.name === category);
+
+                if (!okDate) console.log(`Event ${ev.id} failed DATE`, evDate, from, to);
+                if (!okLoc) console.log(`Event ${ev.id} failed LOCATION`, city, location);
+                if (!okCat) console.log(`Event ${ev.id} failed CATEGORY`, ev.categories.map(c=>c.name), category);
+
+                return okDate && okLoc && okCat;
+            });
+            console.log('Matched events IDs:', filtered.map(ev => ev.id));
+            handleSearchResult(filtered);
+        } else {
+            try {
+                const res = await ApiService.searchEvents({
+                    location,
+                    category,
+                    from: fromDate,
+                    to: toDate
+                });
+                console.log('Server-side search response:', res);
+                const list = Array.isArray(res) ? res : res.eventList || [];
+                handleSearchResult(list);
+            } catch (err) {
+                console.error('Search error:', err);
             }
-            if (!eventList.length) {
-                return showError('Die Veranstaltung konnte nicht gefunden werden.');
-            }
-            handleSearchResult(eventList);
-        } catch (err) {
-            console.error(err);
-            showError('Ein unbekannter Fehler ist passiert.');
         }
     };
 
     return (
-        <div className={`${styles.searchRow} ${inline ? styles.inline : styles.absolute}`}>
-            {/* Ort */}
-            <div className={styles.item}>
-                <div className={styles.label}>Ort</div>
-                <div className={styles.control}>
-                    <FaMapMarkerAlt className={styles.icon} />
-                    <input
-                        type="text"
-                        value={location}
-                        onChange={e => setLocation(e.target.value)}
-                        placeholder="Stadt"
-                        className={styles.input}
-                    />
-                </div>
-            </div>
+        <form className={styles.searchForm} onSubmit={onSearch}>
+            <input
+                type="text"
+                placeholder="Location"
+                value={location}
+                onChange={e => setLocation(e.target.value)}
+            />
 
-            {/* Kategorie */}
-            <div className={styles.item}>
-                <div className={styles.label}>Kategorie</div>
-                <div className={styles.control}>
-                    <FaTags className={styles.icon} />
-                    <select
-                        value={category}
-                        onChange={e => setCategory(e.target.value)}
-                        className={styles.select}
-                    >
-                        <option value="" disabled>Wählen Sie</option>
-                        {categories.map(cat => (
-                            // API'niz kullandığına göre cat.id ve cat.name örneğiyle
-                            <option key={cat.id} value={cat.name}>
-                                {cat.name}
-                            </option>
+            {/* Kategorie-Dropdown */}
+            <div className={styles.categoryContainer} ref={catRef}>
+                <input
+                    type="text"
+                    placeholder="Category"
+                    value={categorySearch}
+                    onChange={handleCategoryInput}
+                    onFocus={() => setShowCat(true)}
+                    autoComplete="off"
+                />
+                {showCat && (
+                    <ul className={styles.dropdownList}>
+                        {filteredCategories.map(name => (
+                            <li
+                                key={name}
+                                className={styles.dropdownItem}
+                                onClick={() => selectCategory(name)}
+                            >
+                                {name}
+                            </li>
                         ))}
-                    </select>
-                </div>
-            </div>
-
-            {/* Zeitraum */}
-            <div className={styles.item}>
-                <div className={styles.label}>Zeitraum</div>
-                <div className={styles.control}>
-                    <FaCalendarAlt className={styles.icon} />
-                    <select
-                        value={dateType}
-                        onChange={e => setDateType(e.target.value)}
-                        className={styles.select}
-                    >
-                        <option value="today">Heute</option>
-                        <option value="weekend">Dieses Wochenende</option>
-                        <option value="custom">Genauer Zeitraum</option>
-                    </select>
-                </div>
-                {dateType === 'custom' && (
-                    <div className={styles.inlinePicker}>
-                        <DatePicker
-                            selectsRange
-                            startDate={startDate}
-                            endDate={endDate}
-                            onChange={([s, e]) => {
-                                setStartDate(s);
-                                setEndDate(e);
-                            }}
-                            inline
-                        />
-                    </div>
+                    </ul>
                 )}
             </div>
 
-            {/* Search Button */}
-            <button type="button" className={styles.button} onClick={onSearch}>
+            <input
+                type="date"
+                placeholder="From"
+                value={fromDate}
+                onChange={e => setFromDate(e.target.value)}
+            />
+            <input
+                type="date"
+                placeholder="To"
+                value={toDate}
+                onChange={e => setToDate(e.target.value)}
+            />
+            <button type="submit" disabled={!isSearchEnabled}>
                 Suchen
             </button>
-
-            {/* Hata mesajı */}
-            {error && <div className={styles.error}>{error}</div>}
-        </div>
+        </form>
     );
 };
 

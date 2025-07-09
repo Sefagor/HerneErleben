@@ -10,7 +10,7 @@ const FindBookingPage = () => {
 
     const handleSearch = async () => {
         if (!confirmationCode.trim()) {
-            setError("Please enter a booking confirmation code");
+            setError("Geben Sie Ihren Reservierungscode");
             setBookingDetails(null);
             setTimeout(() => setError(''), 5000);
             return;
@@ -42,13 +42,13 @@ const FindBookingPage = () => {
                     <div className="fbp-search">
                         <input
                             type="text"
-                            placeholder="Enter your booking confirmation code"
+                            placeholder="Geben Sie Ihren Reservierungscode"
                             value={confirmationCode}
                             onChange={e => setConfirmationCode(e.target.value)}
                             disabled={loading}
                         />
                         <button onClick={handleSearch} disabled={loading}>
-                            {loading ? 'Loading…' : 'Find'}
+                            {loading ? 'Wird Geladet…' : 'Finden'}
                         </button>
                     </div>
 
