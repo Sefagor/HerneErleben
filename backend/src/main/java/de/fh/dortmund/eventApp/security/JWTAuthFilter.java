@@ -3,7 +3,7 @@ package de.fh.dortmund.eventApp.security;
 
 import de.fh.dortmund.eventApp.service.CustomUserDetailsService;
 import de.fh.dortmund.eventApp.utils.JWTUtils;
-import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.*;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,8 +43,8 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
         jwtToken = authHeader.substring(7);
         try{
-            userEmail1 = jwtUtils.extractUsername(jwtToken);
-        } catch (MalformedJwtException e){
+             userEmail1 = jwtUtils.extractUsername(jwtToken);
+        } catch (MalformedJwtException | ExpiredJwtException e){
             userEmail1 = null;
         }
 
