@@ -9,7 +9,6 @@ const HomePage = () => {
 
     return (
         <div className="home">
-            <Banner onSearch={setRoomSearchResults}/>
 
             <div className="divider">
                 <div className="card">
