@@ -1,15 +1,15 @@
 import React from 'react';
 
 const Pagination = ({
-                        roomsPerPage,
-                        totalRooms,
+                        eventsPerPage,
+                        totalEvents,
                         itemsPerPage,
                         totalItems,
                         currentPage,
                         paginate
                     }) => {
-    const perPage = roomsPerPage || itemsPerPage;
-    const total = totalRooms || totalItems;
+    const perPage = eventsPerPage || itemsPerPage;
+    const total = totalEvents || totalItems;
     const pageNumbers = [];
 
     for (let i = 1; i <= Math.ceil(total / perPage); i++) {
