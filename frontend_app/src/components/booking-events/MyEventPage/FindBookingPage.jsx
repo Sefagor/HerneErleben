@@ -33,7 +33,7 @@ const FindBookingPage = () => {
         <div>
 
             <div className="titel-block">
-                <h2 className="fbp-title">Find Booking</h2>
+                <h2 className="fbp-title">Finde Veranstalltung</h2>
             </div>
             <div className="find-booking-page">
 

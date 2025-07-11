@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink, useNavigate} from 'react-router-dom';
+import {Link, NavLink, useNavigate} from 'react-router-dom';
 import ApiService from '../../service/ApiService';
 
 function Navbar() {
@@ -20,7 +20,9 @@ function Navbar() {
         <nav className="navbar">
             <div className="nav-container">
                 <div className="navbar-brand">
+                    <Link to="/home">
                     <img src="https://www.herne.de/media/template/images/stadt_herne_logo_header.svg" alt="Herne Logo" className="nav-herne-logo"/>
+                    </Link>
                 </div>
                 <ul className="navbar-ul">
                     <li><NavLink to="/home" activeclassname="active">Home</NavLink></li>

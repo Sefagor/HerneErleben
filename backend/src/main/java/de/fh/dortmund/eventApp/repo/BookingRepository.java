@@ -10,27 +10,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Repository-Schnittstelle für Booking-Entitäten.
- */
+
 @Repository
 public interface BookingRepository extends ListCrudRepository<Booking, Long> {
 
-    /**
-     * Sucht eine Buchung anhand des Bestätigungscodes.
-     */
     Optional<Booking> findByBookingConfirmationCode(String confirmationCode);
 
-    /**
-     * Gibt alle Buchungen sortiert zurück.
-     */
+
     List<Booking> findAll(Sort sort);
 
-    /**
-     * Prüft, ob bereits eine Buchung für das gegebene Event und den gegebenen User existiert.
-     * @param event das Event
-     * @param user der User
-     * @return true, falls eine Buchung existiert
-     */
+
     boolean existsByEventAndUser(Event event, User user);
 }

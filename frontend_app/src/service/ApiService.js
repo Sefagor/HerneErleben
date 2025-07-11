@@ -115,7 +115,7 @@ static async addEvent(formData) {
         }
     );
 
-        console.log('✅ Response:', response.data);
+        console.log('Response:', response.data);
     return response.data;
 }
 

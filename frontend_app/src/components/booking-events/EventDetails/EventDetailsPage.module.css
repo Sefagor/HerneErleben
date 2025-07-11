@@ -71,6 +71,10 @@
     border-radius: 4px;
 }
 
+.bookBtn:hover{
+    background-color: black;
+}
+
 .contentGrid {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -135,3 +139,18 @@ h2 {
     font-weight: 500;
 }
 
+
+.cancelBtn {
+    background-color: #B85042;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 1rem;
+}
+.cancelBtn:hover {
+    background-color: #000000;
+}
