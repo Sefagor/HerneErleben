@@ -86,3 +86,26 @@
 .searchForm button:hover {
     background-color: #000000;
 }
+
+/* Error Message - always reserve space, hide when empty */
+.error {
+    font-size: 0.9rem;
+    color: #d9534f;
+    min-height: 1.2em;
+    text-align: center;
+    visibility: visible;
+    transition: visibility 0s linear 0.2s;
+}
+
+/* If no content, hide but keep space */
+.error:empty {
+    visibility: hidden;
+    transition-delay: 0s;
+}
+
+.buttonGroup {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 100%;
+    align-items: center;
+}

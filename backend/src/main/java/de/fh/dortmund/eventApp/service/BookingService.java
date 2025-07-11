@@ -158,8 +158,7 @@ public class BookingService {
 
         try {
             Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> new CustomException("Booking Does Not Exist"));
-            booking.setStatus(Status.CANCELLED);
-            bookingRepository.save(booking);
+            bookingRepository.delete(booking);
         } catch (CustomException e) {
             statusCode = 404;
             message = e.getMessage();
