@@ -22,6 +22,7 @@ const EventDetailsPage = () => {
             const res = await ApiService.getEventById(eventId);
             const evt = res.event || res;
             setEvent(evt);
+            console.log('Aktuelle Bookings nach loadEvent():', evt.bookings);
 
             const profile = await ApiService.getUserProfile();
             setUserId(profile.user.id);

@@ -56,22 +56,18 @@ const FindBookingPage = () => {
 
                     {bookingDetails && (
                         <div className="fbp-result-card">
-                            {/* Etkinlik Adı */}
                             <h3>{bookingDetails.eventName}</h3>
 
-                            {/* Rezervasyon Meta */}
                             <p><strong>Confirmation Code:</strong> {bookingDetails.bookingConfirmationCode}</p>
                             <p><strong>Status:</strong> {bookingDetails.event.status}</p>
                             <p><strong>Date:</strong> {bookingDetails.event.eventDate}</p>
                             <p><strong>Location:</strong> {bookingDetails.event.eventLocation.city}</p>
                             <hr/>
 
-                            {/* Kullanıcı Bilgileri */}
                             <h4>Booker Details</h4>
                             <p><strong>Name:</strong> {bookingDetails.user.name}</p>
                             <p><strong>Email:</strong> {bookingDetails.user.email}</p>
 
-                            {/* İsterseniz telefon da ekleyebilirsiniz */}
                             {bookingDetails.user.phoneNumber && (
                                 <p><strong>Phone:</strong> {bookingDetails.user.phoneNumber}</p>
                             )}

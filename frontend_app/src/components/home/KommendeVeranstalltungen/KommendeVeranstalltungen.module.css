@@ -111,3 +111,9 @@
     font-size: 1.1rem;
     margin: 0;
 }
+
+.noEvents {
+    font-size: large;
+    color: black;
+    align-self: center;
+}
