@@ -2,8 +2,8 @@ package de.fh.dortmund.eventApp.controller;
 
 
 import de.fh.dortmund.eventApp.dto.Response;
+import de.fh.dortmund.eventApp.facade.BookingEmailFacade;
 import de.fh.dortmund.eventApp.service.BookingService;
-import de.fh.dortmund.eventApp.service.facade.BookingEmailFacade;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -75,6 +75,15 @@ public class BookingController {
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public ResponseEntity<Response> cancelBooking(@PathVariable Long bookingId) {
         Response response = bookingEmailFacade.cancelBooking(bookingId);
+        /*
+         * Response response = bookingService.cancelBooking(bookingId);
+         *         if (response.getStatusCode() == 200) {
+         *             Booking booking = bookingService.findBookingByID(bookingId);
+         *             if (booking != null) {
+         *                 emailService.sendCancellationEmail(booking.getUser().getEmail(), booking.getBookingConfirmationCode(), booking.getEvent());
+         *             }
+         *         }
+         */
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 

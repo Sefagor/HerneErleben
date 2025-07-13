@@ -36,12 +36,12 @@ function EditProfilePage() {
     }, []);
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        const {name, value} = e.target;
+        setFormData({...formData, [name]: value});
     };
 
     const validateForm = () => {
-        const { name, email, phoneNumber } = formData;
+        const {name, email, phoneNumber} = formData;
         if (!name || !email || !phoneNumber) {
             return false;
         }
@@ -80,27 +80,28 @@ function EditProfilePage() {
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Name:</label>
-                    <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
+                    <input type="text" name="name" value={formData.name} onChange={handleInputChange} required/>
                 </div>
                 <div className="form-group">
                     <label>Email:</label>
-                    <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
+                    <input type="email" name="email" value={formData.email} onChange={handleInputChange} required/>
                 </div>
                 <div className="form-group">
                     <label>Phone Number:</label>
-                    <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange} required />
+                    <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange}
+                           required/>
                 </div>
                 <div className="form-group">
                     <label>New Password (optional):</label>
-                    <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
+                    <input type="password" name="password" value={formData.password} onChange={handleInputChange}/>
                 </div>
 
-               <div className="form-actions">
-                   <button type="submit" className="save-button">Save Changes</button>
-                   <button type="button" className="cancel-button" onClick={() => navigate('/profile')}>
-                       Cancel
-                   </button>
-               </div>
+                <div className="form-actions">
+                    <button type="submit" className="save-button">Save Changes</button>
+                    <button type="button" className="cancel-button" onClick={() => navigate('/profile')}>
+                        Cancel
+                    </button>
+                </div>
 
             </form>
         </div>

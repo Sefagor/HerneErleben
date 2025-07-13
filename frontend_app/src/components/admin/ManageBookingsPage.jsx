@@ -46,13 +46,13 @@ function ManageBookingsPage() {
 
     return (
         <AdminLayout>
-        <div className="manage-bookings-container">
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-            {successMessage && <p className="success-message">{successMessage}</p>}
-            <h2>Manage Bookings</h2>
+            <div className="manage-bookings-container">
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                {successMessage && <p className="success-message">{successMessage}</p>}
+                <h2>Manage Bookings</h2>
 
-            <table className="bookings-table">
-                <thead>
+                <table className="bookings-table">
+                    <thead>
                     <tr>
                         <th>Confirmation Code</th>
                         <th>Booking Date</th>
@@ -62,8 +62,8 @@ function ManageBookingsPage() {
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     {bookings.length === 0 ? (
                         <tr>
                             <td colSpan="7">No bookings found.</td>
@@ -85,9 +85,9 @@ function ManageBookingsPage() {
                             </tr>
                         ))
                     )}
-                </tbody>
-            </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>
         </AdminLayout>
     );
 }

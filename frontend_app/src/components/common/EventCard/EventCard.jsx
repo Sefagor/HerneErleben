@@ -1,7 +1,7 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import styles from './EventCard.module.css';
-import { FaCalendarAlt, FaMapMarkerAlt, FaRegCalendarPlus } from 'react-icons/fa';
+import {FaCalendarAlt, FaMapMarkerAlt, FaRegCalendarPlus} from 'react-icons/fa';
 
 // Statusfarben
 const statusColors = {
@@ -15,7 +15,7 @@ const formatForGoogle = date =>
     date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
 
 // Erzeugt Google Kalender-URL
-const getGoogleCalendarUrl = ({ title, description, location, startDate, endDate }) => {
+const getGoogleCalendarUrl = ({title, description, location, startDate, endDate}) => {
     const params = new URLSearchParams({
         action: 'TEMPLATE',
         text: title,
@@ -26,7 +26,7 @@ const getGoogleCalendarUrl = ({ title, description, location, startDate, endDate
     return `https://calendar.google.com/calendar/render?${params.toString()}`;
 };
 
-const EventCard = ({ event }) => {
+const EventCard = ({event}) => {
     const {
         id,
         eventName,
@@ -72,9 +72,9 @@ const EventCard = ({ event }) => {
                 <div className={styles.overlay}>
                     <p className={styles.description}>{eventDescription}</p>
                     <div className={styles.meta}>
-                        <span><FaCalendarAlt /> {formattedDate}</span>
+                        <span><FaCalendarAlt/> {formattedDate}</span>
                         {eventLocation?.city && (
-                            <span><FaMapMarkerAlt /> {eventLocation.city}</span>
+                            <span><FaMapMarkerAlt/> {eventLocation.city}</span>
                         )}
                     </div>
 
@@ -101,7 +101,7 @@ const EventCard = ({ event }) => {
                     <div className={styles.status}>
             <span
                 className={styles.statusDot}
-                style={{ backgroundColor: statusColors[status] || 'gray' }}
+                style={{backgroundColor: statusColors[status] || 'gray'}}
             />
                         <span className={styles.statusText}>{status}</span>
                     </div>
@@ -112,7 +112,7 @@ const EventCard = ({ event }) => {
                     rel="noopener noreferrer"
                     className={styles.addCalendarButton}
                 >
-                    <FaRegCalendarPlus className={styles.calendarIcon} />
+                    <FaRegCalendarPlus className={styles.calendarIcon}/>
                     Zum Kalender hinzufügen
                 </a>
             </div>

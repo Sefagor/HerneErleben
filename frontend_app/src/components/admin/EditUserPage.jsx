@@ -3,7 +3,7 @@ import {useNavigate, useParams} from 'react-router-dom';
 import ApiService from '../../service/ApiService';
 
 function EditUserPage() {
-    const { userId } = useParams();
+    const {userId} = useParams();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -38,8 +38,8 @@ function EditUserPage() {
     }, [userId]);
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        const {name, value} = e.target;
+        setFormData({...formData, [name]: value});
     };
 
     const handleSubmit = async (e) => {
@@ -68,19 +68,20 @@ function EditUserPage() {
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Name:</label>
-                    <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
+                    <input type="text" name="name" value={formData.name} onChange={handleInputChange} required/>
                 </div>
                 <div className="form-group">
                     <label>Email:</label>
-                    <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
+                    <input type="email" name="email" value={formData.email} onChange={handleInputChange} required/>
                 </div>
                 <div className="form-group">
                     <label>Phone Number:</label>
-                    <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange} required />
+                    <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange}
+                           required/>
                 </div>
                 <div className="form-group">
                     <label>Password:</label>
-                    <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
+                    <input type="password" name="password" value={formData.password} onChange={handleInputChange}/>
                 </div>
                 <div className="form-group">
                     <label>Role:</label>

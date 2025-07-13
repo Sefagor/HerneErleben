@@ -29,7 +29,7 @@ public class EventBody {
     private LocalDate eventDate;
 
     @NotNull
-    private Location eventLocation;
+    private LocationDTO eventLocationDTO;
 
     @Min(value = 0)
     private int maxParticipant;

@@ -28,51 +28,51 @@ function App() {
     return (
         <BrowserRouter>
             <div className="App">
-                <Navbar />
+                <Navbar/>
                 <div className="content">
                     <Routes>
                         {/* Public Routes */}
-                        <Route exact path="/home" element={<HomePage />} />
-                        <Route exact path="/login" element={<LoginPage />} />
-                        <Route path="/register" element={<RegisterPage />} />
-                        <Route path="/events" element={<AllEventsPage />} />
-                        <Route path="/find-booking" element={<FindBookingPage />} />
-                        <Route path="/admin/booking-calendar" element={<AdminRoute element={<BookingCalendarPage />} />} />
-                        <Route path="/admin/send-email" element={<AdminRoute element={<AdminEmailPage />} />} />
+                        <Route exact path="/home" element={<HomePage/>}/>
+                        <Route exact path="/login" element={<LoginPage/>}/>
+                        <Route path="/register" element={<RegisterPage/>}/>
+                        <Route path="/events" element={<AllEventsPage/>}/>
+                        <Route path="/find-booking" element={<FindBookingPage/>}/>
+                        <Route path="/admin/booking-calendar" element={<AdminRoute element={<BookingCalendarPage/>}/>}/>
+                        <Route path="/admin/send-email" element={<AdminRoute element={<AdminEmailPage/>}/>}/>
 
 
                         {/* Protected Routes */}
                         <Route path="/events/:eventId"
-                               element={<ProtectedRoute element={<EventDetailsPage />} />}
+                               element={<ProtectedRoute element={<EventDetailsPage/>}/>}
                         />
                         <Route path="/profile"
-                               element={<ProtectedRoute element={<ProfilePage />} />}
+                               element={<ProtectedRoute element={<ProfilePage/>}/>}
                         />
                         <Route path="/edit-profile"
-                               element={<ProtectedRoute element={<EditProfilePage />} />}
+                               element={<ProtectedRoute element={<EditProfilePage/>}/>}
                         />
 
                         {/* Admin Routes */}
                         <Route path="/admin"
-                               element={<AdminRoute element={<AdminPage />} />}
+                               element={<AdminRoute element={<AdminPage/>}/>}
                         />
 
-                        <Route path="/admin/manage-users" element={<AdminRoute element={<ManageUsersPage />} />} />
-                        <Route path="/admin/add-user" element={<AdminRoute element={<AddUserPage />} />} />
-                        <Route path="/admin/edit-user/:userId" element={<AdminRoute element={<EditUserPage />} />} />
+                        <Route path="/admin/manage-users" element={<AdminRoute element={<ManageUsersPage/>}/>}/>
+                        <Route path="/admin/add-user" element={<AdminRoute element={<AddUserPage/>}/>}/>
+                        <Route path="/admin/edit-user/:userId" element={<AdminRoute element={<EditUserPage/>}/>}/>
 
                         <Route path="/admin/manage-bookings"
-                               element={<AdminRoute element={<ManageBookingsPage />} />}
+                               element={<AdminRoute element={<ManageBookingsPage/>}/>}
                         />
                         <Route path="/admin/edit-booking/:bookingCode"
-                               element={<AdminRoute element={<EditBookingPage />} />}
+                               element={<AdminRoute element={<EditBookingPage/>}/>}
                         />
 
                         {/* Fallback Route */}
-                        <Route path="*" element={<Navigate to="/login" />} />
+                        <Route path="*" element={<Navigate to="/login"/>}/>
                     </Routes>
                 </div>
-                <FooterComponent />
+                <FooterComponent/>
             </div>
         </BrowserRouter>
     );

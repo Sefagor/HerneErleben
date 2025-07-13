@@ -18,7 +18,7 @@ function AdminEmailPage() {
         }
 
         try {
-            const emailContent = { subject, message };
+            const emailContent = {subject, message};
             const response = await ApiService.sendEmailToAll(emailContent);
 
             if (response.statusCode === 200) {

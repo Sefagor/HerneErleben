@@ -25,6 +25,36 @@ public class Response {
     private final List<EventDTO> eventList;
     private final List<BookingDTO> bookingList;
 
+    /**
+     * public Response (int statusCode,
+     * String message,
+     * String metadata,
+     * String token,
+     * String role,
+     * String expirationTime,
+     * String bookingConfirmationCode,
+     * UserDTO user,
+     * EventDTO event,
+     * BookingDTO booking,
+     * List<UserDTO> userList,
+     * List<EventDTO> eventList,
+     * List<BookingDTO> bookingList) {
+     * this.statusCode = statusCode;
+     * this.message = message;
+     * this.metadata = metadata;
+     * this.token = token;
+     * this.role = role;
+     * this.expirationTime = expirationTime;
+     * this.bookingConfirmationCode = bookingConfirmationCode;
+     * this.user = user;
+     * this.event = event;
+     * this.booking = booking;
+     * this.userList = userList;
+     * this.eventList = eventList;
+     * this.bookingList = bookingList;
+     * }
+     **/
+
     private Response(Builder builder) {
         this.statusCode = builder.statusCode;
         this.message = builder.message;

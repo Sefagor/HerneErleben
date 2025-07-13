@@ -1,6 +1,6 @@
 // ProfilePage.jsx
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import ApiService from '../../../service/ApiService';
 import styles from './ProfilePage.module.css';
 

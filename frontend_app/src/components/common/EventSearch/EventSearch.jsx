@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import ApiService from '../../../service/ApiService';
 import styles from './EventSearch.module.css';
 
-const EventSearch = ({ handleSearchResult, inline = false, events = [] }) => {
+const EventSearch = ({handleSearchResult, inline = false, events = []}) => {
     const [location, setLocation] = useState('');
     const [categorySearch, setCategorySearch] = useState('');
     const [category, setCategory] = useState('');
@@ -56,7 +56,7 @@ const EventSearch = ({ handleSearchResult, inline = false, events = [] }) => {
 
     const onSearch = e => {
         e.preventDefault();
-        console.log('isSearchEnabled:', isSearchEnabled, { location, category, fromDate, toDate });
+        console.log('isSearchEnabled:', isSearchEnabled, {location, category, fromDate, toDate});
         setErrorMessage('');
 
         if (!isSearchEnabled) {
@@ -77,7 +77,7 @@ const EventSearch = ({ handleSearchResult, inline = false, events = [] }) => {
             });
             handleSearchResult(result);
         } else {
-            ApiService.searchEvents({ location, category, from: fromDate, to: toDate })
+            ApiService.searchEvents({location, category, from: fromDate, to: toDate})
                 .then(res => {
                     const list = Array.isArray(res) ? res : res.eventList || [];
                     handleSearchResult(list);
@@ -94,7 +94,10 @@ const EventSearch = ({ handleSearchResult, inline = false, events = [] }) => {
                     type="text"
                     placeholder="Ort"
                     value={location}
-                    onChange={e => { setLocation(e.target.value); setErrorMessage(''); }}
+                    onChange={e => {
+                        setLocation(e.target.value);
+                        setErrorMessage('');
+                    }}
                 />
             </div>
 
@@ -131,7 +134,10 @@ const EventSearch = ({ handleSearchResult, inline = false, events = [] }) => {
                     type="date"
                     aria-label="Von (Startdatum)"
                     value={fromDate}
-                    onChange={e => { setFromDate(e.target.value); setErrorMessage(''); }}
+                    onChange={e => {
+                        setFromDate(e.target.value);
+                        setErrorMessage('');
+                    }}
                 />
             </div>
             <div className={styles.dateGroup}>
@@ -140,7 +146,10 @@ const EventSearch = ({ handleSearchResult, inline = false, events = [] }) => {
                     type="date"
                     aria-label="Bis (Enddatum)"
                     value={toDate}
-                    onChange={e => { setToDate(e.target.value); setErrorMessage(''); }}
+                    onChange={e => {
+                        setToDate(e.target.value);
+                        setErrorMessage('');
+                    }}
                 />
             </div>
 

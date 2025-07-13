@@ -23,6 +23,7 @@ public class MqttSubject implements Subject {
     private final String topic = "infos/servertest";
     private final String clientID = "subscriber";
     private final List<Observer> observers = new ArrayList<>();
+
     public MqttSubject() {
         configClient();
     }
@@ -35,7 +36,8 @@ public class MqttSubject implements Subject {
 
         @Override
         public void connectionLost(Throwable cause) {
-            System.out.println("Dispatcher test");
+
+            System.out.println("Connection Lost");
         }
 
 

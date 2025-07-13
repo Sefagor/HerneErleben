@@ -35,7 +35,6 @@ public class EventController {
     }
 
 
-
     @Operation(summary = "Create a new event", description = "Add new event")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Event added"),
@@ -69,7 +68,7 @@ public class EventController {
             @ApiResponse(responseCode = "500", description = "Internal error")
     })
     @GetMapping("/categories")
-    public List<CategoryDTO> getAllCategories(){
+    public List<CategoryDTO> getAllCategories() {
         return eventService.getAllCategories();
     }
 
@@ -96,7 +95,6 @@ public class EventController {
         Response response = eventService.getAllAvailableEvents();
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
-
 
 
     @Operation(summary = "Update Event", description = "Update event")

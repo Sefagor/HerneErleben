@@ -3,7 +3,7 @@ package de.fh.dortmund.eventApp.controller;
 
 import de.fh.dortmund.eventApp.dto.LoginRequest;
 import de.fh.dortmund.eventApp.dto.Response;
-import de.fh.dortmund.eventApp.entity.User;
+import de.fh.dortmund.eventApp.requestBody.RegistrationBody;
 import de.fh.dortmund.eventApp.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -34,8 +34,8 @@ public class AuthController {
             @ApiResponse(responseCode = "500", description = "User could not be registered")
     })
     @PostMapping("/register")
-    public ResponseEntity<Response> register(@Valid @RequestBody User user) {
-        Response response = userService.register(user);
+    public ResponseEntity<Response> register(@Valid @RequestBody RegistrationBody body) {
+        Response response = userService.register(body);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 

@@ -93,31 +93,32 @@ export default class ApiService {
         const response = await axios.put(
             `${this.BASE_URL}/users/update-profile`,
             profileData,
-            { headers: this.getHeader() }
+            {headers: this.getHeader()}
         );
         return response.data;
     }
-static async addEvent(formData) {
- console.log('👉 Sending FormData to /events/add:');
-    for (let pair of formData.entries()) {
-        console.log(`${pair[0]}: ${pair[1]}`);
-    }
 
-    const response = await axios.post(
-        `${this.BASE_URL}/events/add`,
-       /* `${this.HERNE_URL}/send`,*/
-        formData,
-        {
-            headers: {
-                ...this.getHeader(),
-                "Content-Type": "multipart/form-data",
-            },
+    static async addEvent(formData) {
+        console.log('👉 Sending FormData to /events/add:');
+        for (let pair of formData.entries()) {
+            console.log(`${pair[0]}: ${pair[1]}`);
         }
-    );
+
+        const response = await axios.post(
+            `${this.BASE_URL}/events/add`,
+            /* `${this.HERNE_URL}/send`,*/
+            formData,
+            {
+                headers: {
+                    ...this.getHeader(),
+                    "Content-Type": "multipart/form-data",
+                },
+            }
+        );
 
         console.log('Response:', response.data);
-    return response.data;
-}
+        return response.data;
+    }
 
     static async getAllEvents() {
         const response = await axios.get(
@@ -137,7 +138,7 @@ static async addEvent(formData) {
     static async getAllLocations() {
         const response = await axios.get(
             `${this.BASE_URL}/locations/all`,
-            { headers: this.getHeader() }
+            {headers: this.getHeader()}
         );
         return response.data;
     }
@@ -146,18 +147,19 @@ static async addEvent(formData) {
         const response = await axios.put(
             `${this.BASE_URL}/users/update/${userId}`,
             profileData,
-            { headers: this.getHeader() }
+            {headers: this.getHeader()}
         );
         return response.data;
     }
-static async sendEmailToAll(emailContent) {
-    const response = await axios.post(
-        `${this.BASE_URL}/events/notify`,
-        emailContent,
-        { headers: this.getHeader() }
-    );
-    return response.data;
-}
+
+    static async sendEmailToAll(emailContent) {
+        const response = await axios.post(
+            `${this.BASE_URL}/events/notify`,
+            emailContent,
+            {headers: this.getHeader()}
+        );
+        return response.data;
+    }
 
     /** BOOKINGS */
 

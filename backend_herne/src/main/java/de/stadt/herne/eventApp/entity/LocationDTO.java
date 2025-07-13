@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Valid
-public class Location {
+public class LocationDTO {
 
     @NotNull
     private String city;

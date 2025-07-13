@@ -46,28 +46,23 @@ public class BookingService {
         System.out.println("userid:" + userId + "\neventid:" + eventID);
 
         try {
-            // 1) Existiert das Event und der User?
             Event event = eventRepository.findById(eventID)
                     .orElseThrow(() -> new CustomException("Event nicht gefunden"));
             User user = userRepository.findById(userId)
                     .orElseThrow(() -> new CustomException("Benutzer nicht gefunden"));
 
-            // 2) Buchungen für vergangene Events verhindern
             if (event.getEventDate().isBefore(LocalDate.now())) {
                 throw new CustomException("Buchung für vergangene Veranstaltungen nicht möglich");
             }
 
-            // 3) Prüfen, ob noch Plätze frei sind
             if (!eventService.isEventAvailable(event)) {
                 throw new CustomException("Keine freien Plätze mehr für diese Veranstaltung");
             }
 
-            // 4) Doppelte Buchungen unterbinden
             if (bookingRepository.existsByEventAndUser(event, user)) {
                 throw new CustomException("Sie haben diese Veranstaltung bereits gebucht");
             }
 
-            // 5) Neue Buchung anlegen und speichern
             Booking bookingRequest = new Booking();
             bookingRequest.setEvent(event);
             bookingRequest.setUser(user);
@@ -78,11 +73,9 @@ public class BookingService {
             metadata = user.getEmail();
 
         } catch (CustomException e) {
-            // Benutzerfehler (z.B. schon gebucht, kein Platz)
             statusCode = 400;
             message = e.getMessage();
         } catch (Exception e) {
-            // Serverfehler
             statusCode = 500;
             message = "Fehler beim Speichern der Buchung: " + e.getMessage();
         }
@@ -165,7 +158,7 @@ public class BookingService {
 
         } catch (Exception e) {
             statusCode = 500;
-            message = "Error Cancelling a booking: "+ e.getMessage();
+            message = "Error Cancelling a booking: " + e.getMessage();
         }
         return Response.builder()
                 .message(message)

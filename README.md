@@ -33,7 +33,9 @@ docker compose up --build
 ### Database
 
 * The Database base (PostGreSql) run on the port 5433
-    * You can use mariadb to test the connection and see the contains of the database
+    * You can use Dbeaver to test the connection and see the contains of the database
+
+### Mosquitto
 
 ### SMTP4Dev
 
@@ -41,6 +43,7 @@ docker compose up --build
 * When you call the /events/all endpoint (or trigger any email-sending logic), you should see a new email appear here.
 
 ### Swagger
- *  Swagger can be reached at the addresses 
-   * http://localhost:8090/swagger-ui/index.html (Backend) 
-   * http://localhost:8091/swagger-ui/index.html (Backend herne)
+
+* Swagger can be reached at the addresses
+* http://localhost:8090/swagger-ui/index.html (Backend)
+* http://localhost:8091/swagger-ui/index.html (Backend herne)

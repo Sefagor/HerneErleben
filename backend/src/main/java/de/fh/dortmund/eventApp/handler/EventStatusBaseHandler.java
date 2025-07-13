@@ -7,10 +7,10 @@ public class EventStatusBaseHandler extends BaseHandler {
     @Override
     public void handle(Event event, EventBody body) {
         System.out.println("Status handler");
-       if(shouldHandle(event, body)){
-           event.setStatus(body.getStatus());
-       }
-       handleNext(event, body);
+        if (shouldHandle(event, body)) {
+            event.setStatus(body.getStatus());
+        }
+        handleNext(event, body);
     }
 
     @Override

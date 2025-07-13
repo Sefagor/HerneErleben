@@ -42,17 +42,17 @@ function ManageUsersPage() {
 
     return (
         <AdminLayout>
-        <div className="manage-users-container">
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-            {successMessage && <p className="success-message">{successMessage}</p>}
-            <h2>Manage Users</h2>
+            <div className="manage-users-container">
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                {successMessage && <p className="success-message">{successMessage}</p>}
+                <h2>Manage Users</h2>
 
-            <button className="add-user-button" onClick={() => navigate('/admin/add-user')}>
-                Add New User
-            </button>
+                <button className="add-user-button" onClick={() => navigate('/admin/add-user')}>
+                    Add New User
+                </button>
 
-            <table className="users-table">
-                <thead>
+                <table className="users-table">
+                    <thead>
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
@@ -60,8 +60,8 @@ function ManageUsersPage() {
                         <th>Role</th>
                         <th>Actions</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     {users.length === 0 ? (
                         <tr>
                             <td colSpan="5">No users found.</td>
@@ -80,9 +80,9 @@ function ManageUsersPage() {
                             </tr>
                         ))
                     )}
-                </tbody>
-            </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>
         </AdminLayout>
     );
 }
