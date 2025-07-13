@@ -12,6 +12,7 @@ import de.fh.dortmund.eventApp.repo.EventRepository;
 import de.fh.dortmund.eventApp.repo.FeedbackRepository;
 import de.fh.dortmund.eventApp.repo.UserRepository;
 import de.fh.dortmund.eventApp.requestBody.FeedbackBody;
+import de.fh.dortmund.eventApp.requestBody.RegistrationBody;
 import de.fh.dortmund.eventApp.utils.JWTUtils;
 import de.fh.dortmund.eventApp.utils.Utils;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -43,18 +44,22 @@ public class UserService {
     }
 
 
-    public Response register(User user) {
+    public Response register(RegistrationBody body) {
         int statusCode = 200;
         String message = "Successful";
         UserDTO userDTO = null;
+        User user = new User();
         try {
             if (user.getRole() == null || user.getRole().isBlank()) {
                 user.setRole("USER");
             }
-            if (userRepository.existsByEmail(user.getEmail())) {
-                throw new CustomException(user.getEmail() + "Already Exists");
+            if (userRepository.existsByEmail(body.getEmail())) {
+                throw new CustomException(body.getEmail() + " already exists");
             }
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setName(body.getName());
+            user.setEmail(body.getEmail());
+            user.setPassword(passwordEncoder.encode(body.getPassword()));
+            user.setPhoneNumber(body.getPhoneNumber());
             User savedUser = userRepository.save(user);
             userDTO = Utils.mapUserEntityToUserDTO(savedUser);
         } catch (CustomException e) {
@@ -224,7 +229,7 @@ public class UserService {
                 .build();
     }
 
-    public Response updateProfile(String email, User userUpdate) {
+    public Response updateProfile(String email, RegistrationBody body) {
         int statusCode = 200;
         String message = "Profile updated successfully";
         UserDTO userDTO = null;
@@ -232,22 +237,22 @@ public class UserService {
             User existingUser = userRepository.findByEmailIgnoreCase(email)
                     .orElseThrow(() -> new CustomException("User Not Found"));
 
-            if (userUpdate.getName() != null && !userUpdate.getName().isBlank()) {
-                existingUser.setName(userUpdate.getName());
+            if (body.getName() != null && !body.getName().isBlank()) {
+                existingUser.setName(body.getName());
             }
 
-            if (userUpdate.getPhoneNumber() != null && !userUpdate.getPhoneNumber().isBlank()) {
-                existingUser.setPhoneNumber(userUpdate.getPhoneNumber());
+            if (body.getPhoneNumber() != null && !body.getPhoneNumber().isBlank()) {
+                existingUser.setPhoneNumber(body.getPhoneNumber());
             }
 
-            if (userUpdate.getPassword() != null && !userUpdate.getPassword().isBlank()) {
-                existingUser.setPassword(passwordEncoder.encode(userUpdate.getPassword()));
+            if (body.getPassword() != null && !body.getPassword().isBlank()) {
+                existingUser.setPassword(passwordEncoder.encode(body.getPassword()));
             }
 
 
             User savedUser = userRepository.save(existingUser);
 
-             userDTO = Utils.mapUserEntityToUserDTO(savedUser);
+            userDTO = Utils.mapUserEntityToUserDTO(savedUser);
 
         } catch (CustomException e) {
             statusCode = 404;
@@ -255,7 +260,8 @@ public class UserService {
 
         } catch (Exception e) {
             statusCode = 500;
-            message = "Error updating profile: " + e.getMessage();}
+            message = "Error updating profile: " + e.getMessage();
+        }
 
         return Response.builder()
                 .statusCode(statusCode)

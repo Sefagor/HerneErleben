@@ -1,145 +1,145 @@
 * {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: #666;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #666;
 }
 
 *, *::before, *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html {
-  overflow: scroll;
+    overflow: scroll;
 }
 
 body {
-  overflow: auto;
+    overflow: auto;
 }
 
 html, body, #root {
-  height: 100%;
-  margin: 0;
-  padding-top: 28px;
-  scroll-behavior: smooth;
+    height: 100%;
+    margin: 0;
+    padding-top: 28px;
+    scroll-behavior: smooth;
 }
 
 #root > .App {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow-y: visible;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: visible;
 }
 
 .content {
-  flex: 1 0 auto;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
+    flex: 1 0 auto;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
 }
 
 .App footer {
-  flex-shrink: 0;
+    flex-shrink: 0;
 }
 
 /* General Navbar Styling */
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 1rem 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fffef8;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
-  font-size: 1rem;
-  z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fffef8;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    z-index: 100;
 }
 
 .nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Logo / Brand */
 .navbar-brand {
-  display: flex;
-  align-content: center;
-  justify-content: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }
 
 .navbar-brand a {
-  font-size: 45px;
-  color: black;
-  text-decoration: none;
+    font-size: 45px;
+    color: black;
+    text-decoration: none;
 }
 
 .nav-herne-logo {
-  width: 310px;
+    width: 310px;
 }
 
 /* Menü */
 .navbar-ul {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-left: 100px;
-  padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-left: 100px;
+    padding: 0;
 }
 
 .navbar-ul li a {
-  font-size: 22px;
-  color: #444;
-  text-decoration: none;
-  transition: color 0.3s, transform 0.3s;
+    font-size: 22px;
+    color: #444;
+    text-decoration: none;
+    transition: color 0.3s, transform 0.3s;
 }
 
 .navbar-ul li a:hover,
 .navbar-ul li a.active {
-  color: #2cc387;
-  transform: translateY(-2px);
+    color: #2cc387;
+    transform: translateY(-2px);
 }
 
 .auth-container {
-  max-width: 400px;
-  padding: 20px;
-  border: 0.5px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff;
-  margin: 20px auto 50px auto;
+    max-width: 400px;
+    padding: 20px;
+    border: 0.5px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    margin: 20px auto 50px auto;
 }
 
 .auth-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #007F86;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007F86;
 }
 
 .register-link {
-  margin-top: 20px;
-  font-size: 13px;
+    margin-top: 20px;
+    font-size: 13px;
 }
 
 .register-link a {
-  color: #007F86;
-  text-decoration: none;
+    color: #007F86;
+    text-decoration: none;
 }
 
 .form-group {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .form-group label {
-  display: block;
-  font-weight: bold;
+    display: block;
+    font-weight: bold;
 }
 
 
@@ -150,33 +150,33 @@ html, body, #root {
 
 
 .form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .form-group input {
-  width: 90%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 button[type="submit"] {
-  width: 95%;
-  padding: 12px;
-  background-color: #007F86;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-weight: 800;
-  border-radius: 10px;
+    width: 95%;
+    padding: 12px;
+    background-color: #007F86;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 800;
+    border-radius: 10px;
 }
 
 button[type="submit"]:hover {
-  background-color: rgb(34, 80, 128)
+    background-color: rgb(34, 80, 128)
 }
 
 
@@ -184,111 +184,111 @@ button[type="submit"]:hover {
 
 /*PAGINATION COMPONENT STYLING*/
 .pagination-nav {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
 }
 
 .pagination-ul {
-  list-style-type: none;
-  display: flex;
-  padding: 0;
+    list-style-type: none;
+    display: flex;
+    padding: 0;
 }
 
 .pagination-li {
-  margin: 0 5px;
+    margin: 0 5px;
 }
 
 .pagination-button {
-  background-color: #fff;
-  color: #007F86;
-  border: 1px solid #007F86;
-  border-radius: 5px;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+    background-color: #fff;
+    color: #007F86;
+    border: 1px solid #007F86;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .pagination-button:hover {
-  background-color: rgb(34, 80, 128);
-  color: #fff;
+    background-color: rgb(34, 80, 128);
+    color: #fff;
 }
 
 .current-page {
-  background-color: #007F86;
-  color: #fff;
+    background-color: #007F86;
+    color: #fff;
 }
 
 /* src/component/user/EditProfilePage.css */
 
 .edit-profile-page {
-  max-width: 800px;
-  margin: 20px auto auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .edit-profile-page h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #007F86;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007F86;
 }
 
 .profile-details {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .profile-details p {
-  margin: 5px 0;
+    margin: 5px 0;
 }
 
 .delete-profile-button {
-  background-color: #ff4b4b;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  display: block;
-  margin: 20px auto;
+    background-color: #ff4b4b;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 20px auto;
 }
 
 .delete-profile-button:hover {
-  background-color: #e60000;
+    background-color: #e60000;
 }
 
 .error-message {
-  color: red;
-  text-align: center;
+    color: red;
+    text-align: center;
 }
 
 .auth-container .form-actions {
-  display: flex;
-  justify-content: flex-end; /* oder space-between / center je nach Geschmack */
-  gap: 10px; /* Abstand zwischen Buttons */
-  margin-top: 20px;
+    display: flex;
+    justify-content: flex-end; /* oder space-between / center je nach Geschmack */
+    gap: 10px; /* Abstand zwischen Buttons */
+    margin-top: 20px;
 }
 
 .save-button {
-  background-color: teal;
-  color: white;
-  font-weight: bold;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+    background-color: teal;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .cancel-button {
-  background-color: teal;
-  color: white;
-  font-weight: bold;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+    background-color: teal;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }

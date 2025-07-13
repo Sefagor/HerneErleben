@@ -1,4 +1,4 @@
-package de.fh.dortmund.eventApp.service.facade;
+package de.fh.dortmund.eventApp.facade;
 
 import de.fh.dortmund.eventApp.dto.Response;
 import de.fh.dortmund.eventApp.entity.Booking;

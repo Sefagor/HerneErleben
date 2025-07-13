@@ -1,4 +1,4 @@
-package de.fh.dortmund.eventApp.security;
+package de.fh.dortmund.eventApp.config.security;
 
 
 import org.springframework.context.annotation.Bean;

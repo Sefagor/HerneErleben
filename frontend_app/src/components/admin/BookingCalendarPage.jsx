@@ -33,12 +33,12 @@ function BookingCalendarPage() {
         }
     };
 
-    const tileContent = ({ date, view }) => {
+    const tileContent = ({date, view}) => {
         if (view === 'month') {
             const dateStr = format(date, 'yyyy-MM-dd');
             const count = bookingsPerDay[dateStr] || 0;
             return count > 0 ? (
-                <div style={{ marginTop: 5, fontSize: '0.8em', color: 'green' }}>
+                <div style={{marginTop: 5, fontSize: '0.8em', color: 'green'}}>
                     {count} Booking{count > 1 ? 's' : ''}
                 </div>
             ) : null;
@@ -57,26 +57,26 @@ function BookingCalendarPage() {
 
     return (
         <AdminLayout>
-        <div className="booking-calendar-container">
-            <h2>Booking Calendar</h2>
-            <Calendar
-                onChange={handleDateChange}
-                value={selectedDate}
-                tileContent={tileContent}
-            />
-            <h3>Bookings for {selectedDateStr}</h3>
-            {bookingsForSelectedDate.length === 0 ? (
-                <p>No bookings for this day.</p>
-            ) : (
-                <ul>
-                    {bookingsForSelectedDate.map(booking => (
-                        <li key={booking.id}>
-                            {booking.bookingConfirmationCode} - {booking.user?.name} → {booking.event?.eventName}
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </div>
+            <div className="booking-calendar-container">
+                <h2>Booking Calendar</h2>
+                <Calendar
+                    onChange={handleDateChange}
+                    value={selectedDate}
+                    tileContent={tileContent}
+                />
+                <h3>Bookings for {selectedDateStr}</h3>
+                {bookingsForSelectedDate.length === 0 ? (
+                    <p>No bookings for this day.</p>
+                ) : (
+                    <ul>
+                        {bookingsForSelectedDate.map(booking => (
+                            <li key={booking.id}>
+                                {booking.bookingConfirmationCode} - {booking.user?.name} → {booking.event?.eventName}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
         </AdminLayout>
     );
 }

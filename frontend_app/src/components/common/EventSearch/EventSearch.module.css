@@ -21,6 +21,7 @@
     font-size: 0.9rem;
     transition: border-color 0.2s;
 }
+
 .searchForm input[type="text"]:focus,
 .searchForm input[type="date"]:focus {
     outline: none;
@@ -33,6 +34,7 @@
     flex: 1;
     min-width: 120px;
 }
+
 .categoryContainer input {
     width: 100%;
     padding: 0.5rem 0.75rem;
@@ -41,6 +43,7 @@
     font-size: 0.9rem;
     transition: border-color 0.2s;
 }
+
 .categoryContainer input:focus {
     outline: none;
     border-color: #007bff;
@@ -67,6 +70,7 @@
     cursor: pointer;
     transition: background-color 0.15s;
 }
+
 .dropdownItem:hover {
     background-color: #f0f0f0;
 }
@@ -83,6 +87,7 @@
     font-size: 0.95rem;
     transition: background-color 0.2s;
 }
+
 .searchForm button:hover {
     background-color: #000000;
 }

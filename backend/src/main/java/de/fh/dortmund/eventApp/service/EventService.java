@@ -183,40 +183,41 @@ public class EventService {
                 .next(new EventCategoryBaseHandler());
         baseHandler.handle(event, body);
         System.out.println(event.getEventName());
-        /* if(body.getEventName() != null){
-            event.setEventName(body.getEventName());
-        }
-        if(body.getEventDescription() != null){
-            event.setEventDescription(body.getEventDescription());
-        }
-        if(body.getEventLocation() != null){
-            event.setEventLocation(body.getEventLocation());
-        }
+        /**
+         if(body.getEventName() != null){
+         event.setEventName(body.getEventName());
+         }
+         if(body.getEventDescription() != null){
+         event.setEventDescription(body.getEventDescription());
+         }
+         if(body.getEventLocation() != null){
+         event.setEventLocation(body.getEventLocation());
+         }
 
-        if(body.getMaxParticipant() != event.getMaxParticipant()){
-            event.setMaxParticipant(body.getMaxParticipant());
-        }
-        if (body.getEventDate() != null) {
-            event.setEventDate(body.getEventDate());
-        }
-        if (!body.getCategories().isEmpty()) {
-            event.setCategory(new ArrayList<>(body.getCategories().stream().map(Utils::mapCategoryDTOToCategory).toList()));
-        }
-        if (body.getStatus() != null) event.setStatus(body.getStatus());
-        if (body.getEventLocation() != null) event.setEventLocation(body.getEventLocation());
-        if (body.getStartTime() != null) {
-            event.setStartTime(body.getStartTime());
-        }
-        if (body.getEndTime() != null) {
-            event.setStartTime(body.getStartTime());
-        }
-        if (body.getEventPhoto() != null) event.setEventPhoto(body.getEventPhoto());
-        if (body.getMaxParticipant() != event.getMaxParticipant() && body.getMaxParticipant() > 0) {
-            event.setMaxParticipant(body.getMaxParticipant());
-        }
-        if (body.getEventPhoto() != null) {
-            event.setEventPhoto(body.getEventPhoto());
-        }*/
+         if(body.getMaxParticipant() != event.getMaxParticipant()){
+         event.setMaxParticipant(body.getMaxParticipant());
+         }
+         if (body.getEventDate() != null) {
+         event.setEventDate(body.getEventDate());
+         }
+         if (!body.getCategories().isEmpty()) {
+         event.setCategory(new ArrayList<>(body.getCategories().stream().map(Utils::mapCategoryDTOToCategory).toList()));
+         }
+         if (body.getStatus() != null) event.setStatus(body.getStatus());
+         if (body.getEventLocation() != null) event.setEventLocation(body.getEventLocation());
+         if (body.getStartTime() != null) {
+         event.setStartTime(body.getStartTime());
+         }
+         if (body.getEndTime() != null) {
+         event.setStartTime(body.getStartTime());
+         }
+         if (body.getEventPhoto() != null) event.setEventPhoto(body.getEventPhoto());
+         if (body.getMaxParticipant() != event.getMaxParticipant() && body.getMaxParticipant() > 0) {
+         event.setMaxParticipant(body.getMaxParticipant());
+         }
+         if (body.getEventPhoto() != null) {
+         event.setEventPhoto(body.getEventPhoto());
+         }**/
         if (!event.equals(eventS)) {
             eventRepository.save(event);
         }

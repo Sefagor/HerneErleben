@@ -71,7 +71,7 @@
     border-radius: 4px;
 }
 
-.bookBtn:hover{
+.bookBtn:hover {
     background-color: black;
 }
 
@@ -151,6 +151,7 @@ h2 {
     transition: background-color 0.2s;
     margin-top: 1rem;
 }
+
 .cancelBtn:hover {
     background-color: #000000;
 }

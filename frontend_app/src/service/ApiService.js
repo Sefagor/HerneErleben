@@ -62,6 +62,7 @@ export default class ApiService {
             `${this.BASE_URL}/users/get-logged-in-profile-info`,
             {headers: this.getHeader()}
         );
+
         return response.data;
     }
 
@@ -91,10 +92,32 @@ export default class ApiService {
 
     static async updateUserProfile(profileData) {
         const response = await axios.put(
-            `${this.BASE_URL}/users/update-profile`,
+            `${this.BASE_URL}/auth/update`,
             profileData,
-            { headers: this.getHeader() }
+            {headers: this.getHeader()}
         );
+        return response.data;
+    }
+
+    static async addEvent(formData) {
+        console.log('👉 Sending FormData to /events/add:');
+        for (let pair of formData.entries()) {
+            console.log(`${pair[0]}: ${pair[1]}`);
+        }
+
+        const response = await axios.post(
+            `${this.BASE_URL}/events/add`,
+            /* `${this.HERNE_URL}/send`,*/
+            formData,
+            {
+                headers: {
+                    ...this.getHeader(),
+                    "Content-Type": "multipart/form-data",
+                },
+            }
+        );
+
+        console.log('Response:', response.data);
         return response.data;
     }
 
@@ -112,22 +135,32 @@ export default class ApiService {
         return response.data;
     }
 
+    // GET all locations (you need to implement this on backend!)
+    static async getAllLocations() {
+        const response = await axios.get(
+            `${this.BASE_URL}/locations/all`,
+            {headers: this.getHeader()}
+        );
+        return response.data;
+    }
+
     static async updateUser(userId, profileData) {
         const response = await axios.put(
             `${this.BASE_URL}/users/update/${userId}`,
             profileData,
-            { headers: this.getHeader() }
+            {headers: this.getHeader()}
         );
         return response.data;
     }
-static async sendEmailToAll(emailContent) {
-    const response = await axios.post(
-        `${this.BASE_URL}/events/notify`,
-        emailContent,
-        { headers: this.getHeader() }
-    );
-    return response.data;
-}
+
+    static async sendEmailToAll(emailContent) {
+        const response = await axios.post(
+            `${this.BASE_URL}/events/notify`,
+            emailContent,
+            {headers: this.getHeader()}
+        );
+        return response.data;
+    }
 
     /** BOOKINGS */
 

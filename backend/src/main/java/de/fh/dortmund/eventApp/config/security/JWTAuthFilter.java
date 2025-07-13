@@ -1,9 +1,10 @@
-package de.fh.dortmund.eventApp.security;
+package de.fh.dortmund.eventApp.config.security;
 
 
 import de.fh.dortmund.eventApp.service.CustomUserDetailsService;
 import de.fh.dortmund.eventApp.utils.JWTUtils;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,7 +31,6 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
         final String authHeader = request.getHeader("Authorization");
         final String jwtToken;
         final String userEmail;
@@ -42,13 +42,16 @@ public class JWTAuthFilter extends OncePerRequestFilter {
         }
 
         jwtToken = authHeader.substring(7);
-        try{
-             userEmail1 = jwtUtils.extractUsername(jwtToken);
-        } catch (MalformedJwtException | ExpiredJwtException e){
+        System.out.println(jwtToken);
+        try {
+            userEmail1 = jwtUtils.extractUsername(jwtToken);
+        } catch (Exception e) {
+            System.out.println(e.getCause());
             userEmail1 = null;
         }
 
         userEmail = userEmail1;
+        System.out.println("userEmail: " + userEmail);
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(userEmail);
             if (jwtUtils.isValidToken(jwtToken, userDetails)) {

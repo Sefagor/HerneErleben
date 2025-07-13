@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class MqttPublisher {
+public class PublisherService {
 
     private final String brokerUrl = "tcp://mosquitto:1883";
     private final String topic = "infos/servertest";

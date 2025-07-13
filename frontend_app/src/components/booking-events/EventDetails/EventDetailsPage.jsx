@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, {useCallback, useEffect, useState} from 'react';
+import {Link, useParams} from 'react-router-dom';
 import ApiService from '../../../service/ApiService';
-import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import {FaCalendarAlt, FaMapMarkerAlt} from 'react-icons/fa';
 import styles from './EventDetailsPage.module.css';
 
 const EventDetailsPage = () => {
-    const { eventId } = useParams();
+    const {eventId} = useParams();
 
     const [event, setEvent] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -97,10 +97,14 @@ const EventDetailsPage = () => {
     if (error) return <p className={styles.error}>{error}</p>;
     if (!event) return <p className={styles.error}>Veranstaltung nicht gefunden.</p>;
 
-    const { eventName, eventDate, eventDescription, eventPhotoUrl, eventLocation = {}, categories = [] } = event;
-    const { city, street, houseNumber, zip } = eventLocation;
+    const {eventName, eventDate, eventDescription, eventPhotoUrl, eventLocation = {}, categories = []} = event;
+    const {city, street, houseNumber, zip} = eventLocation;
     const address = street && zip && city ? `${street} ${houseNumber}, ${zip} ${city}` : 'Ort nicht verfügbar';
-    const formattedDate = new Date(eventDate).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    const formattedDate = new Date(eventDate).toLocaleDateString('de-DE', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
 
     return (
         <div className={styles.outerContainer}>
@@ -111,12 +115,12 @@ const EventDetailsPage = () => {
 
                 <div
                     className={styles.hero}
-                    style={{ backgroundImage: `url(${eventPhotoUrl || 'data:image/jpeg;base64,' + event.eventPhoto})` }}
+                    style={{backgroundImage: `url(${eventPhotoUrl || 'data:image/jpeg;base64,' + event.eventPhoto})`}}
                 >
                     <div className={styles.overlay}>
                         <h1 className={styles.heroTitle}>{eventName}</h1>
                         <p className={styles.heroMeta}>
-                            <FaCalendarAlt /> {formattedDate} &nbsp;&nbsp; <FaMapMarkerAlt /> {address}
+                            <FaCalendarAlt/> {formattedDate} &nbsp;&nbsp; <FaMapMarkerAlt/> {address}
                         </p>
                         <p className={styles.countdown}>{timeLeft}</p>
                         {categories.length > 0 && (

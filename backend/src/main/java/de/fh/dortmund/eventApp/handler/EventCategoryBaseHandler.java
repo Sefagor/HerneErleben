@@ -16,7 +16,7 @@ public class EventCategoryBaseHandler extends BaseHandler {
                     .map(Utils::mapCategoryDTOToCategory)
                     .toList());
         }
-         handleNext(event, body);
+        handleNext(event, body);
     }
 
 

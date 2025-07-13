@@ -1,4 +1,4 @@
-package de.fh.dortmund.eventApp.security;
+package de.fh.dortmund.eventApp.config.security;
 
 import de.fh.dortmund.eventApp.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;

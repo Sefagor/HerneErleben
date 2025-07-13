@@ -1,7 +1,7 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import styles from './EventCard.module.css';
-import { FaCalendarAlt, FaMapMarkerAlt, FaRegCalendarPlus } from 'react-icons/fa';
+import {FaCalendarAlt, FaMapMarkerAlt, FaRegCalendarPlus} from 'react-icons/fa';
 
 // Statusfarben
 const statusColors = {
@@ -15,7 +15,7 @@ const formatForGoogle = date =>
     date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
 
 // Erzeugt Google Kalender-URL
-const getGoogleCalendarUrl = ({ title, description, location, startDate, endDate }) => {
+const getGoogleCalendarUrl = ({title, description, location, startDate, endDate}) => {
     const params = new URLSearchParams({
         action: 'TEMPLATE',
         text: title,
@@ -26,7 +26,7 @@ const getGoogleCalendarUrl = ({ title, description, location, startDate, endDate
     return `https://calendar.google.com/calendar/render?${params.toString()}`;
 };
 
-const EventCard = ({ event }) => {
+const EventCard = ({event}) => {
     const {
         id,
         eventName,
@@ -38,13 +38,12 @@ const EventCard = ({ event }) => {
         categories,
     } = event;
 
+    console.log(`EventCard ${id} categories:`, categories);
+
+
     // Start- und Enddatum (Standard: 2-stündiges Event)
     const startDate = eventDate;
     const endDate = new Date(new Date(eventDate).getTime() + 2 * 60 * 60 * 1000).toISOString();
-
-    // Ablauf prüfen: ist das Event abgelaufen?
-    const isExpired = new Date() > new Date(endDate);
-
     const calendarUrl = getGoogleCalendarUrl({
         title: eventName,
         description: eventDescription,
@@ -73,9 +72,9 @@ const EventCard = ({ event }) => {
                 <div className={styles.overlay}>
                     <p className={styles.description}>{eventDescription}</p>
                     <div className={styles.meta}>
-                        <span><FaCalendarAlt /> {formattedDate}</span>
+                        <span><FaCalendarAlt/> {formattedDate}</span>
                         {eventLocation?.city && (
-                            <span><FaMapMarkerAlt /> {eventLocation.city}</span>
+                            <span><FaMapMarkerAlt/> {eventLocation.city}</span>
                         )}
                     </div>
 
@@ -84,8 +83,8 @@ const EventCard = ({ event }) => {
                         <div className={styles.categories}>
                             {categories.map(cat => (
                                 <span key={cat.name} className={styles.categoryTag}>
-                                    {cat.name}
-                                </span>
+                  {cat.name}
+                </span>
                             ))}
                         </div>
                     )}
@@ -100,11 +99,11 @@ const EventCard = ({ event }) => {
                 <div className={styles.upperContainer}>
                     <h3 className={styles.title}>{eventName}</h3>
                     <div className={styles.status}>
-                        <span
-                            className={styles.statusDot}
-                            style={{ backgroundColor: isExpired ? statusColors.EXPIRED : (statusColors[status] || 'gray') }}
-                        />
-                        <span className={styles.statusText}>{isExpired ? 'EXPIRED' : status}</span>
+            <span
+                className={styles.statusDot}
+                style={{backgroundColor: statusColors[status] || 'gray'}}
+            />
+                        <span className={styles.statusText}>{status}</span>
                     </div>
                 </div>
                 <a
@@ -113,7 +112,7 @@ const EventCard = ({ event }) => {
                     rel="noopener noreferrer"
                     className={styles.addCalendarButton}
                 >
-                    <FaRegCalendarPlus className={styles.calendarIcon} />
+                    <FaRegCalendarPlus className={styles.calendarIcon}/>
                     Zum Kalender hinzufügen
                 </a>
             </div>

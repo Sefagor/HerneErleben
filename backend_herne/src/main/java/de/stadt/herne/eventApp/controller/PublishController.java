@@ -2,7 +2,7 @@ package de.stadt.herne.eventApp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.stadt.herne.eventApp.entity.EventBody;
-import de.stadt.herne.eventApp.mqtt.MqttPublisher;
+import de.stadt.herne.eventApp.mqtt.PublisherService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -32,10 +32,10 @@ import java.util.Set;
 @Tag(name = "Event controller Herne API", description = "Send new and update Events")
 public class PublishController {
 
-    private final MqttPublisher mqttPublisher;
+    private final PublisherService mqttPublisher;
     private final ObjectMapper objectMapper;
 
-    public PublishController(MqttPublisher mqttPublisher, ObjectMapper objectMapper) {
+    public PublishController(PublisherService mqttPublisher, ObjectMapper objectMapper) {
         this.mqttPublisher = mqttPublisher;
         this.objectMapper = objectMapper;
     }

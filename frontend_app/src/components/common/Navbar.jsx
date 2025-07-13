@@ -21,7 +21,8 @@ function Navbar() {
             <div className="nav-container">
                 <div className="navbar-brand">
                     <Link to="/home">
-                    <img src="https://www.herne.de/media/template/images/stadt_herne_logo_header.svg" alt="Herne Logo" className="nav-herne-logo"/>
+                        <img src="https://www.herne.de/media/template/images/stadt_herne_logo_header.svg"
+                             alt="Herne Logo" className="nav-herne-logo"/>
                     </Link>
                 </div>
                 <ul className="navbar-ul">
@@ -32,8 +33,8 @@ function Navbar() {
                     {isUser && <li><NavLink to="/profile" activeclassname="active">Profile</NavLink></li>}
                     {isAdmin && <li><NavLink to="/admin" activeclassname="active">Admin</NavLink></li>}
 
-                    {!isAuthenticated &&<li><NavLink to="/login" activeclassname="active">Login</NavLink></li>}
-                    {!isAuthenticated &&<li><NavLink to="/register" activeclassname="active">Register</NavLink></li>}
+                    {!isAuthenticated && <li><NavLink to="/login" activeclassname="active">Login</NavLink></li>}
+                    {!isAuthenticated && <li><NavLink to="/register" activeclassname="active">Register</NavLink></li>}
                     {isAuthenticated && (
                         <li>
                             <NavLink to="/home" onClick={handleLogout} activeclassname="active">
