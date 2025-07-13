@@ -63,5 +63,4 @@ public class AuthController {
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
-
 }
