@@ -97,27 +97,6 @@ export default class ApiService {
         );
         return response.data;
     }
-static async addEvent(formData) {
- console.log('👉 Sending FormData to /events/add:');
-    for (let pair of formData.entries()) {
-        console.log(`${pair[0]}: ${pair[1]}`);
-    }
-
-    const response = await axios.post(
-        `${this.BASE_URL}/events/add`,
-       /* `${this.HERNE_URL}/send`,*/
-        formData,
-        {
-            headers: {
-                ...this.getHeader(),
-                "Content-Type": "multipart/form-data",
-            },
-        }
-    );
-
-        console.log('Response:', response.data);
-    return response.data;
-}
 
     static async getAllEvents() {
         const response = await axios.get(
@@ -129,15 +108,6 @@ static async addEvent(formData) {
     static async getEventById(eventId) {
         const response = await axios.get(
             `${this.BASE_URL}/events/event-by-id/${eventId}`
-        );
-        return response.data;
-    }
-
-    // GET all locations (you need to implement this on backend!)
-    static async getAllLocations() {
-        const response = await axios.get(
-            `${this.BASE_URL}/locations/all`,
-            { headers: this.getHeader() }
         );
         return response.data;
     }

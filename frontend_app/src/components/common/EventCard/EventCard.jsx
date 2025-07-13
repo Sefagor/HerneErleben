@@ -38,12 +38,13 @@ const EventCard = ({ event }) => {
         categories,
     } = event;
 
-    console.log(`EventCard ${id} categories:`, categories);
-
-
     // Start- und Enddatum (Standard: 2-stündiges Event)
     const startDate = eventDate;
     const endDate = new Date(new Date(eventDate).getTime() + 2 * 60 * 60 * 1000).toISOString();
+
+    // Ablauf prüfen: ist das Event abgelaufen?
+    const isExpired = new Date() > new Date(endDate);
+
     const calendarUrl = getGoogleCalendarUrl({
         title: eventName,
         description: eventDescription,
@@ -83,8 +84,8 @@ const EventCard = ({ event }) => {
                         <div className={styles.categories}>
                             {categories.map(cat => (
                                 <span key={cat.name} className={styles.categoryTag}>
-                  {cat.name}
-                </span>
+                                    {cat.name}
+                                </span>
                             ))}
                         </div>
                     )}
@@ -99,11 +100,11 @@ const EventCard = ({ event }) => {
                 <div className={styles.upperContainer}>
                     <h3 className={styles.title}>{eventName}</h3>
                     <div className={styles.status}>
-            <span
-                className={styles.statusDot}
-                style={{ backgroundColor: statusColors[status] || 'gray' }}
-            />
-                        <span className={styles.statusText}>{status}</span>
+                        <span
+                            className={styles.statusDot}
+                            style={{ backgroundColor: isExpired ? statusColors.EXPIRED : (statusColors[status] || 'gray') }}
+                        />
+                        <span className={styles.statusText}>{isExpired ? 'EXPIRED' : status}</span>
                     </div>
                 </div>
                 <a
