@@ -64,7 +64,7 @@ function EditUserPage() {
         <div className="auth-container">
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
-            <h2>Edit User</h2>
+            <h2>Benutzer bearbeiten</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Name:</label>

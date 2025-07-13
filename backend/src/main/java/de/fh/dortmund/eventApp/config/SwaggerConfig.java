@@ -26,10 +26,10 @@ public class SwaggerConfig {
     OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info().title("App Management API").version("1.O"))
-                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
+                .addSecurityItem(new SecurityRequirement().addList("Authorization"))
                 .components(
                         new Components()
-                                .addSecuritySchemes("bearerAuth", new SecurityScheme()
+                                .addSecuritySchemes("Authorization", new SecurityScheme()
                                         .type(SecurityScheme.Type.HTTP)
                                         .scheme("Bearer")
                                         .bearerFormat("JWT")));

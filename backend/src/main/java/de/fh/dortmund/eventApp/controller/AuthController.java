@@ -3,6 +3,7 @@ package de.fh.dortmund.eventApp.controller;
 
 import de.fh.dortmund.eventApp.dto.LoginRequest;
 import de.fh.dortmund.eventApp.dto.Response;
+import de.fh.dortmund.eventApp.entity.User;
 import de.fh.dortmund.eventApp.requestBody.RegistrationBody;
 import de.fh.dortmund.eventApp.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,10 +12,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -47,6 +47,19 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<Response> login(@RequestBody LoginRequest loginRequest) {
         Response response = userService.login(loginRequest);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
+
+
+    @Operation(summary = "Update user", description = "Change users information")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Changed"),
+            @ApiResponse(responseCode = "500", description = "Error")
+    })
+    @PutMapping("/update")
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<Response> updateUser(@RequestBody RegistrationBody body, @AuthenticationPrincipal User user) {
+        Response response = userService.updateProfile(user.getEmail(), body);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 

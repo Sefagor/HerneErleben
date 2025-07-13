@@ -62,6 +62,7 @@ export default class ApiService {
             `${this.BASE_URL}/users/get-logged-in-profile-info`,
             {headers: this.getHeader()}
         );
+
         return response.data;
     }
 
@@ -91,7 +92,7 @@ export default class ApiService {
 
     static async updateUserProfile(profileData) {
         const response = await axios.put(
-            `${this.BASE_URL}/users/update-profile`,
+            `${this.BASE_URL}/auth/update`,
             profileData,
             {headers: this.getHeader()}
         );

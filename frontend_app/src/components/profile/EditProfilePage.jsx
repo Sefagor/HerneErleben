@@ -60,10 +60,10 @@ function EditProfilePage() {
             const response = await ApiService.updateUserProfile(formData);
 
             if (response.statusCode === 200) {
-                setSuccessMessage('Profile updated successfully');
+                setSuccessMessage('Profil erfolgreich aktualisiert');
                 setTimeout(() => {
                     setSuccessMessage('');
-                    navigate('/'); // oder auf Profilseite zurück
+                    navigate('/home');
                 }, 3000);
             }
         } catch (error) {
@@ -76,7 +76,7 @@ function EditProfilePage() {
         <div className="auth-container">
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
-            <h2>Edit Profile</h2>
+            <h2>Profil bearbeiten</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Name:</label>

@@ -35,7 +35,7 @@ const ProfilePage = () => {
                     className={styles.editProfileButton}
                     onClick={handleEditProfile}
                 >
-                    Edit Profile
+                    Profil bearbeiten
                 </button>
             </div>
 
@@ -43,14 +43,14 @@ const ProfilePage = () => {
 
             {user && (
                 <div className={styles.profileDetails}>
-                    <h3>My Profile Details</h3>
+                    <h3>Meine Profildetails</h3>
                     <p><strong>Email:</strong> {user.email}</p>
-                    <p><strong>Phone Number:</strong> {user.phoneNumber}</p>
+                    <p><strong>Handy number:</strong> {user.phoneNumber}</p>
                 </div>
             )}
 
             <div className={styles.bookingsSection}>
-                <h3>My Booking History</h3>
+                <h3>Mein Buchungsverlauf</h3>
                 {/* Booking kartları buraya gelecek */}
             </div>
         </div>

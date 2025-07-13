@@ -12,6 +12,8 @@ function RegisterPage() {
         phoneNumber: ''
     });
 
+    const to = '/home';
+
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
@@ -51,8 +53,20 @@ function RegisterPage() {
                 setSuccessMessage('User registered successfully');
                 setTimeout(() => {
                     setSuccessMessage('');
-                    navigate('/');
                 }, 3000);
+                try {
+                    const response = await ApiService.loginUser({
+                        email: formData.email,
+                        password: formData.password
+                    });                    if (response.statusCode === 200) {
+                        localStorage.setItem('token', response.token);
+                        localStorage.setItem('role', response.role);
+                        navigate(to, {replace: true});
+                    }
+                } catch (error) {
+                    setErrorMessage(error.response?.data?.message || error.message);
+                    setTimeout(() => setErrorMessage(''), 5000);
+                }
             }
         } catch (error) {
             setErrorMessage(error.response?.data?.message || error.message);

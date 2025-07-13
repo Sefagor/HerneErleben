@@ -4,6 +4,7 @@ package de.fh.dortmund.eventApp.controller;
 import de.fh.dortmund.eventApp.dto.Response;
 import de.fh.dortmund.eventApp.entity.User;
 import de.fh.dortmund.eventApp.requestBody.FeedbackBody;
+import de.fh.dortmund.eventApp.requestBody.RegistrationBody;
 import de.fh.dortmund.eventApp.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -105,4 +106,5 @@ public class UserController {
         // TODO: send feedback
         // userService
     }
+
 }

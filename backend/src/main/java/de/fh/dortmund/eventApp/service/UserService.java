@@ -229,7 +229,7 @@ public class UserService {
                 .build();
     }
 
-    public Response updateProfile(String email, User userUpdate) {
+    public Response updateProfile(String email, RegistrationBody body) {
         int statusCode = 200;
         String message = "Profile updated successfully";
         UserDTO userDTO = null;
@@ -237,16 +237,16 @@ public class UserService {
             User existingUser = userRepository.findByEmailIgnoreCase(email)
                     .orElseThrow(() -> new CustomException("User Not Found"));
 
-            if (userUpdate.getName() != null && !userUpdate.getName().isBlank()) {
-                existingUser.setName(userUpdate.getName());
+            if (body.getName() != null && !body.getName().isBlank()) {
+                existingUser.setName(body.getName());
             }
 
-            if (userUpdate.getPhoneNumber() != null && !userUpdate.getPhoneNumber().isBlank()) {
-                existingUser.setPhoneNumber(userUpdate.getPhoneNumber());
+            if (body.getPhoneNumber() != null && !body.getPhoneNumber().isBlank()) {
+                existingUser.setPhoneNumber(body.getPhoneNumber());
             }
 
-            if (userUpdate.getPassword() != null && !userUpdate.getPassword().isBlank()) {
-                existingUser.setPassword(passwordEncoder.encode(userUpdate.getPassword()));
+            if (body.getPassword() != null && !body.getPassword().isBlank()) {
+                existingUser.setPassword(passwordEncoder.encode(body.getPassword()));
             }
 
 
