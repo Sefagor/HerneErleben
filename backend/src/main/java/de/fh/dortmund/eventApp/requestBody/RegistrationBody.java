@@ -22,4 +22,6 @@ public class RegistrationBody {
     @NotBlank(message = "Password is required")
     private String password;
 
+    private String role;
+
 }

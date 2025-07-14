@@ -7,7 +7,6 @@ public class EventPhotoBaseHandler extends BaseHandler {
 
     @Override
     public void handle(Event event, EventBody body) {
-        System.out.println("photo handler");
 
         if (shouldHandle(event, body)) {
             event.setEventPhoto(body.getEventPhoto());

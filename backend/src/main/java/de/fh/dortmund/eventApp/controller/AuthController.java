@@ -63,4 +63,15 @@ public class AuthController {
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
+    @Operation(summary = "Update user", description = "Change users information")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Changed"),
+            @ApiResponse(responseCode = "500", description = "Error")
+    })
+    @PutMapping("/update-user")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<Response> updateUserAdmin(@RequestBody RegistrationBody body, @RequestParam String email) {
+        Response response = userService.updateProfile(email, body);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
 }

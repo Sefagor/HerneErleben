@@ -2,6 +2,7 @@ package de.fh.dortmund.eventApp.facade;
 
 import de.fh.dortmund.eventApp.dto.Response;
 import de.fh.dortmund.eventApp.entity.Booking;
+import de.fh.dortmund.eventApp.entity.Event;
 import de.fh.dortmund.eventApp.service.BookingService;
 import de.fh.dortmund.eventApp.service.EmailService;
 import de.fh.dortmund.eventApp.service.EventService;
@@ -30,13 +31,17 @@ public class BookingEmailFacade {
     }
 
     public Response cancelBooking(Long bookingId) {
+        Booking booking = bookingService.findBookingByID(bookingId);
+        String email = booking.getUser().getEmail();
+        String confirmationCode = booking.getBookingConfirmationCode();
+        Event event = new Event();
+        event.setId(booking.getEvent().getId());
+        event.setEventDate(booking.getEvent().getEventDate());
+        event.setEventName(booking.getEvent().getEventName());
 
         Response response = bookingService.cancelBooking(bookingId);
         if (response.getStatusCode() == 200) {
-            Booking booking = bookingService.findBookingByID(bookingId);
-            if (booking != null) {
-                emailService.sendCancellationEmail(booking.getUser().getEmail(), booking.getBookingConfirmationCode(), booking.getEvent());
-            }
+                emailService.sendCancellationEmail(email, confirmationCode, event);
         }
         return response;
     }
