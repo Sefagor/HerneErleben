@@ -1,10 +1,12 @@
 /* src/components/ProfilePage/ProfilePage.module.css */
 .profilePage {
     max-width: 1000px;
+    height: 100vh;
     margin: 0 auto;
     padding: 2rem;
     font-family: "Segoe UI", Tahoma, sans-serif;
     color: #333;
+    background-color: #fff8eb;
 }
 
 /* Header */

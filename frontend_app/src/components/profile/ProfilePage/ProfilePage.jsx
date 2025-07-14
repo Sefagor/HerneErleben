@@ -13,27 +13,22 @@ const ProfilePage = () => {
     useEffect(() => {
         const fetchUserWithBookings = async () => {
             try {
-                // 1) Profil cevabını al
                 const profileRes = await ApiService.getUserProfile();
                 const profile    = profileRes.user;
 
-                // 2) Rezervasyonları al (Swagger cevabına göre bookings user.bookings içinde geliyor)
                 const bookingsRes = await ApiService.getUserBookings(profile.id);
                 const rawBookings = bookingsRes.user?.bookings ?? [];
 
-                // 3) Her booking.event.categories’i garanti boş dizi yap
                 const bookings = rawBookings.map(b => ({
                     ...b,
                     event: {
                         ...b.event,
-                        // categories undefined ise boş dizi ata
                         categories: Array.isArray(b.event.categories)
                             ? b.event.categories
                             : []
                     }
                 }));
 
-                // 4) State’e profili + normalize edilmiş bookings’i ata
                 setUser({
                     ...profile,
                     bookings
@@ -55,7 +50,6 @@ const ProfilePage = () => {
 
     const { name, email, phoneNumber, bookings } = user;
 
-    // src/components/ProfilePage/ProfilePage.jsx (sadece JSX kısmı)
     return (
         <div className={styles.profilePage}>
             {/* Header Card */}
