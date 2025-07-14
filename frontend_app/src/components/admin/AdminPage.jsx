@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ApiService from '../../service/ApiService';
-import NotificationBadge from './NotificationBadge';
-import AdminLayout from './AdminLayout'
-
+import AdminLayout from './AdminLayout';
+import './AdminPage.css'; // <--- neue CSS Datei optional
 
 const AdminPage = () => {
     const [adminName, setAdminName] = useState('');
@@ -24,30 +23,25 @@ const AdminPage = () => {
 
     return (
         <AdminLayout>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                <h2>Admin Dashboard</h2>
-                <NotificationBadge/>
-            </div>
-            <div className="admin-page">
-                <h1 className="welcome-message">Welcome, {adminName}</h1>
-                <div className="admin-actions">
-                    <button className="admin-button" onClick={() => navigate('/admin/manage-users')}>
-                        Manage Users
-                    </button>
-                    <button className="admin-button" onClick={() => navigate('/admin/manage-bookings')}>
-                        Manage Bookings
-                    </button>
-                    <button className="admin-button" onClick={() => navigate('/admin/add-booking')}>Add Booking
-                        (Manual)
-                    </button>
-                    <button className="admin-button" onClick={() => navigate('/admin/booking-calendar')}>Booking
-                        Calendar
-                    </button>
+            <div className="admin-dashboard-container">
+                <div className="dashboard-header">
+                    <h2>Admin Dashboard</h2>
+                </div>
 
+                <div className="welcome-section">
+                    <h1>👋 Welcome, <span className="admin-name">{adminName}</span></h1>
+                    <p className="subtitle">Here are your available actions:</p>
+                </div>
+
+                <div className="button-grid">
+                    <button onClick={() => navigate('/admin/manage-users')}>👤 Manage Users</button>
+                    <button onClick={() => navigate('/admin/manage-bookings')}>📦 Manage Bookings</button>
+                    <button onClick={() => navigate('/admin/booking-calendar')}>🗓️ Booking Calendar</button>
+                    <button onClick={() => navigate('/admin/send-email')}>📧 Send Email</button>
                 </div>
             </div>
         </AdminLayout>
     );
-}
+};
 
 export default AdminPage;

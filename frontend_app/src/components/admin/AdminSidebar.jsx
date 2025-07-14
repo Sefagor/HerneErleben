@@ -16,9 +16,7 @@ function AdminSidebar() {
                 <NavLink to="/admin/manage-bookings" className={({isActive}) => isActive ? 'active' : ''}>
                     Manage Bookings
                 </NavLink>
-                <NavLink to="/admin/add-booking" className={({isActive}) => isActive ? 'active' : ''}>
-                    Add Booking
-                </NavLink>
+
                 <NavLink to="/admin/booking-calendar" className={({isActive}) => isActive ? 'active' : ''}>
                     Booking Calendar
                 </NavLink>

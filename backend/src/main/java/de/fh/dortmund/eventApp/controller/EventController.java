@@ -133,9 +133,9 @@ public class EventController {
             @ApiResponse(responseCode = "201", description = "Email sent"),
             @ApiResponse(responseCode = "500", description = "Internal error")
     })
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("notify")
-    public void sendEmailToEveryUser(@Valid EmailContent emailContent) {
+    public void sendEmailToEveryUser(@Valid @RequestBody EmailContent emailContent) {
         emailService.sendToEveryone(emailContent);
     }
 
