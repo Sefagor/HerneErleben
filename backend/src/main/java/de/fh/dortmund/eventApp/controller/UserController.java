@@ -94,6 +94,17 @@ public class UserController {
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
+    @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<Response> updateUserById(
+            @PathVariable("id") String userId,
+            @RequestBody User userUpdate
+    ) {
+        Response response = userService.updateUserById(userId, userUpdate);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
+
+
 
     @Operation(summary = "Send feedback ", description = "Send  feedback")
     @ApiResponses(value = {

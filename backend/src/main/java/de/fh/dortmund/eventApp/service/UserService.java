@@ -269,6 +269,53 @@ public class UserService {
                 .user(userDTO)
                 .build();
     }
+    public Response updateUserById(String userId, User userUpdate) {
+        int statusCode = 200;
+        String message = "User updated successfully";
+        UserDTO userDTO = null;
+
+        try {
+            User existingUser = userRepository.findById(Long.valueOf(userId))
+                    .orElseThrow(() -> new CustomException("User not found"));
+
+            if (userUpdate.getName() != null && !userUpdate.getName().isBlank()) {
+                existingUser.setName(userUpdate.getName());
+            }
+
+            if (userUpdate.getEmail() != null && !userUpdate.getEmail().isBlank()) {
+                existingUser.setEmail(userUpdate.getEmail());
+            }
+
+            if (userUpdate.getPhoneNumber() != null && !userUpdate.getPhoneNumber().isBlank()) {
+                existingUser.setPhoneNumber(userUpdate.getPhoneNumber());
+            }
+
+            if (userUpdate.getPassword() != null && !userUpdate.getPassword().isBlank()) {
+                existingUser.setPassword(passwordEncoder.encode(userUpdate.getPassword()));
+            }
+
+            if (userUpdate.getRole() != null && !userUpdate.getRole().isBlank()) {
+                existingUser.setRole(userUpdate.getRole());
+            }
+
+            User savedUser = userRepository.save(existingUser);
+            userDTO = Utils.mapUserEntityToUserDTO(savedUser);
+
+        } catch (CustomException e) {
+            statusCode = 404;
+            message = e.getMessage();
+        } catch (Exception e) {
+            statusCode = 500;
+            message = "Error updating user: " + e.getMessage();
+        }
+
+        return Response.builder()
+                .statusCode(statusCode)
+                .message(message)
+                .user(userDTO)
+                .build();
+    }
+
 
 
     public void sendFeedback(FeedbackBody feedbackBody) {
