@@ -1,74 +1,102 @@
-/* ProfilePage.module.css */
-
+/* src/components/ProfilePage/ProfilePage.module.css */
 .profilePage {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 2rem 1rem;
-    font-family: Arial, sans-serif;
+    padding: 2rem;
+    font-family: "Segoe UI", Tahoma, sans-serif;
     color: #333;
 }
 
-.welcome {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    text-align: center;
+/* Header */
+.headerCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #E7E8D1;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
-.profileActions {
+.headerInfo {
     display: flex;
-    justify-content: center;
-    margin-bottom: 2rem;
+    flex-direction: column;
+}
+
+.welcome {
+    margin: 0;
+    font-size: 1.75rem;
+    color: #B85042;
+}
+
+.subtitle {
+    margin: 0.25rem 0 0;
+    font-size: 1rem;
+    color: #555;
 }
 
 .editProfileButton {
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 0.4rem;
-    background-color: #2cc387;
+    background-color: #B85042;
     color: #fff;
-    font-size: 1rem;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background-color 0.2s ease;
 }
 
 .editProfileButton:hover {
-    background-color: #28a174;
+    background-color: #A43E34;
 }
 
-.errorMessage {
-    color: #d9534f;
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.profileDetails {
-    background: #f9f9f9;
-    border-radius: 0.4rem;
+/* Profile Details Card */
+.profileDetailsCard {
+    background-color: #fff;
     padding: 1.5rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-left: 6px solid #A7BEAE;
+    border-radius: 6px;
     margin-bottom: 2rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
-.profileDetails h3 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 1.4rem;
+.cardTitle {
+    margin: 0 0 1rem;
+    font-size: 1.25rem;
+    color: #B85042;
 }
 
-.profileDetails p {
-    margin: 0.5rem 0;
-    line-height: 1.5;
+.detailsList {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    row-gap: 0.75rem;
+    column-gap: 1rem;
 }
 
+.detailsList dt {
+    font-weight: 600;
+    color: #555;
+}
+
+.detailsList dd {
+    margin: 0;
+    color: #333;
+}
+
+/* Bookings */
 .bookingsSection {
-    background: #fff;
-    border-radius: 0.4rem;
-    padding: 1.5rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
 }
 
-.bookingsSection h3 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 1.4rem;
+.bookingsList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.emptyMessage {
+    text-align: center;
+    color: #777;
+    margin-top: 1rem;
 }
