@@ -14,6 +14,10 @@ jobs:
       matrix:
         os: [ ubuntu-latest ]
         jdk: [ 24 ]
+        project:
+          - backend_herne
+          - backend
+          - frontend_app
           # This is a list of all projects that should be built and pushed.
           # YOU NEED TO UPDATE THIS LIST WHEN YOU ADD A NEW PROJECT AND WITH
           # THE CORRECT NAME OF THE PROJECT FOLDER.
