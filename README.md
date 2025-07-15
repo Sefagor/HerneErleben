@@ -16,7 +16,7 @@ docker compose up --build
     * Locate the ports: section.
     * Change only the first number (before the colon **:** ) to another unused port.
 
-### Spring Boot App
+### Events Management App
 
 * The Spring Boot application runs by default on *http://localhost:8090*
 * You can test it with Swagger
