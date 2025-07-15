@@ -36,7 +36,7 @@ docker compose up --build
     * You can use Dbeaver to test the connection and see the contains of the database
 
 ### Mosquitto
-
+* The MQTT broker is available at: mqtt://localhost:1883
 ### SMTP4Dev
 
 * The development email interface is available at: *http://localhost:5000
