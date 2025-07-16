@@ -1,5 +1,12 @@
 # Event Management Backend
 
+## About My Role
+
+I was mainly responsible for the **frontend development** of this project.  
+In addition, I actively contributed to the **backend**, especially in implementing data persistence, connecting the REST API endpoints with the database, and working on the `Controller` classes.  
+Through this project, I gained strong practical experience with the **Spring Boot** architecture and its integration with RESTful services and PostgreSQL.
+
+
 ## Installation
 
 * Navigate to the directory with your docker-compose.yaml file then build and run the services
@@ -47,3 +54,35 @@ docker compose up --build
 * Swagger can be reached at the addresses
 * http://localhost:8090/swagger-ui/index.html (Backend)
 * http://localhost:8091/swagger-ui/index.html (Backend herne)
+
+---
+
+### ℹ️ Note: Adding Mock Events
+
+You can easily add mock events for testing purposes using **Swagger UI** at  
+**http://localhost:8091/swagger-ui/index.html** (Herne Backend).
+
+Use the `POST /events/add` endpoint and provide a JSON payload like this:
+
+```json
+{
+  "status": "ACTIVE",
+  "herneID": "bbacacbbaabaafffa",
+  "eventDate": "2025-07-18",
+  "eventLocation": {
+    "city": "Herne",
+    "street": "Hauptstraße",
+    "houseNumber": 12,
+    "zip": 44623
+  },
+  "maxParticipant": 100,
+  "eventPhoto": "https://example.com/images/event.jpg",
+  "eventDescription": "A fun community event with music, food, and games.",
+  "eventName": "Event4",
+  "startTime": "14:00",
+  "endTime": "18:00",
+  "categories": [
+    { "name": "Fiesta" }
+  ]
+}
+
