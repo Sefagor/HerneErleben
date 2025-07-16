@@ -1,4 +1,4 @@
-# Event Management Backend
+# Herne Erleben
 
 ## About My Role
 
