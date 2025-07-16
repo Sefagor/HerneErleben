@@ -62,7 +62,7 @@ docker compose up --build
 You can easily add mock events for testing purposes using **Swagger UI** at  
 **http://localhost:8091/swagger-ui/index.html** (Herne Backend).
 
-Use the `POST /events/add` endpoint and provide a JSON payload like this:
+Use the `POST /events/send` endpoint and provide a JSON payload like this:
 
 ```json
 {
